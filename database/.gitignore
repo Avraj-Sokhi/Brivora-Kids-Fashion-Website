@@ -1,0 +1,38 @@
+# Laravel / PHP
+/vendor/
+node_modules/
+.phpunit.result.cache
+.php_cs.cache
+composer.phar
+
+# Laravel storage & cache — keep the directory but ignore runtime files
+/public/storage
+/storage/*.log
+/storage/*.key
+/storage/*.sqlite*
+/storage/framework/cache/data/
+/storage/framework/sessions/
+/storage/framework/testing/
+/storage/framework/views/
+/bootstrap/cache/*.php
+
+# IDEs, editors, OS
+/.idea/
+/.vscode/
+*.sublime-workspace
+*.sublime-project
+Thumbs.db
+*.DS_Store
+
+# Logs / runtime
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+coverage/
+build/
+npm-debug.log
+
+# Optional: ignore local environment tool configs
+Homestead.yaml
+Homestead.json
+valet/*.local
