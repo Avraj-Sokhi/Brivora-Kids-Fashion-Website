@@ -1,0 +1,25 @@
+# Laravel & PHP
+vendor/
+.env
+.env.*
+.phpunit.result.cache
+storage/
+bootstrap/cache/
+
+# Node & Vite
+node_modules/
+public/build/
+
+# IDE & OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*.DS_Store
+Thumbs.db
+
+# Misc
+npm-debug.log*
+yarn-error.log*
+composer.lock
+debug.log
