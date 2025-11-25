@@ -92,7 +92,7 @@
       <p>£30.00</p>
       <p>Blue puffer with striped cuffs.</p>
       <p class="stock">In Stock</p>
-      <form method="POST" action="{{ route('basket.add', ['productId' => 4]) }}">
+      <form method="POST" action="{{ route('basket.add', ['productId' => 5]) }}">
         @csrf
         <button class="btn" type="submit">Add to Basket</button>
       </form>
@@ -106,7 +106,7 @@
       <p>£28.00</p>
       <p>Fleece coat with tractor print.</p>
       <p class="stock">In Stock</p>
-      <form method="POST" action="{{ route('basket.add', ['productId' => 4]) }}">
+      <form method="POST" action="{{ route('basket.add', ['productId' => 6]) }}">
         @csrf
         <button class="btn" type="submit">Add to Basket</button>
       </form>
@@ -121,7 +121,7 @@
       <p>£22.00</p>
       <p>Warm sneaker with fuzzy lining .</p>
       <p class="stock">In Stock</p>
-      <form method="POST" action="{{ route('basket.add', ['productId' => 4]) }}">
+      <form method="POST" action="{{ route('basket.add', ['productId' => 7]) }}">
         @csrf
         <button class="btn" type="submit">Add to Basket</button>
       </form>
@@ -135,7 +135,7 @@
       <p>£24.00</p>
       <p>Superhero-themed high-top sneaker.</p>
       <p class="stock">In Stock</p>
-      <form method="POST" action="{{ route('basket.add', ['productId' => 4]) }}">
+      <form method="POST" action="{{ route('basket.add', ['productId' => 8]) }}">
         @csrf
         <button class="btn" type="submit">Add to Basket</button>
       </form>
@@ -149,7 +149,7 @@
       <p>£26.00</p>
       <p>Dinosaur-themed canvas sneaker.</p>
       <p class="stock">In Stock</p>
-      <form method="POST" action="{{ route('basket.add', ['productId' => 4]) }}">
+      <form method="POST" action="{{ route('basket.add', ['productId' => 9]) }}">
         @csrf
         <button class="btn" type="submit">Add to Basket</button>
       </form>
@@ -164,7 +164,7 @@
       <p>£16.00</p>
       <p>Classic polo with white collar.</p>
       <p class="stock">In Stock</p>
-      <form method="POST" action="{{ route('basket.add', ['productId' => 4]) }}">
+      <form method="POST" action="{{ route('basket.add', ['productId' => 10]) }}">
         @csrf
         <button class="btn" type="submit">Add to Basket</button>
       </form>
@@ -178,7 +178,7 @@
       <p>£14.00</p>
       <p>Striped shirt with embroidered racecars.</p>
       <p class="stock">In Stock</p>
-      <form method="POST" action="{{ route('basket.add', ['productId' => 4]) }}">
+      <form method="POST" action="{{ route('basket.add', ['productId' => 11]) }}">
         @csrf
         <button class="btn" type="submit">Add to Basket</button>
       </form>
@@ -192,7 +192,7 @@
       <p>£15.00</p>
       <p>Fun dino-themed long sleeve shirt.</p>
       <p class="stock">In Stock</p>
-      <form method="POST" action="{{ route('basket.add', ['productId' => 4]) }}">
+      <form method="POST" action="{{ route('basket.add', ['productId' => 12]) }}">
         @csrf
         <button class="btn" type="submit">Add to Basket</button>
       </form>
@@ -207,7 +207,7 @@
       <p>£18.00</p>
       <p>Space-themed joggers with planet embroidery.</p>
       <p class="stock">In Stock</p>
-      <form method="POST" action="{{ route('basket.add', ['productId' => 4]) }}">
+      <form method="POST" action="{{ route('basket.add', ['productId' => 13]) }}">
         @csrf
         <button class="btn" type="submit">Add to Basket</button>
       </form>
@@ -221,7 +221,7 @@
       <p>£17.00</p>
       <p>Elastic joggers with pastel dinosaur print.</p>
       <p class="stock">In Stock</p>
-      <form method="POST" action="{{ route('basket.add', ['productId' => 4]) }}">
+      <form method="POST" action="{{ route('basket.add', ['productId' => 14]) }}">
         @csrf
         <button class="btn" type="submit">Add to Basket</button>
       </form>
@@ -236,22 +236,230 @@
       <p>£20.00</p>
       <p>Black joggers with Pikachu and other pokemons.</p>
       <p class="stock">In Stock</p>
-      <form method="POST" action="{{ route('basket.add', ['productId' => 4]) }}">
+      <form method="POST" action="{{ route('basket.add', ['productId' => 15]) }}">
         @csrf
         <button class="btn" type="submit">Add to Basket</button>
       </form>
     </div>
   </div>
 
+  <!-- Accessories Girls -->
+                       <div class="card" data-category="accessories" data-price="15">
+    <img src="{{ asset('images for website/girls accesories 1.png') }}" alt="Pink Backpack" />
+    <div class="card-body">
+      <h3>Pink Backpack</h3>
+      <p>£15.00</p>
+      <p>Fun Pink backpack with eyes and rainbows</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 16]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
 
-  <!-- GIRLS SECTION -->
-  {{-- NOTE FOR TEAMMATES:
-       Please add girls' products below using the same structure.
-       Use categories: accessories, outerwear, trousers, shoes, tops.
-       Each product block should include:
-       - <div class="card" data-category="CATEGORY" data-price="PRICE">
-       - <img src="{{ asset('images for website/FILENAME') }}" alt="ALT TEXT" />
-       - Product name, price, description, stock status, and Add to Basket button.
-  --}}
+                       <div class="card" data-category="accessories" data-price="10">
+    <img src="{{ asset('images for website/girls accesories 2.png') }}" alt="Pink Cap" />
+    <div class="card-body">
+      <h3>Pink Barbie Cap</h3>
+      <p>£10.00</p>
+      <p>Pink cap with barbie signature</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 17]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
+                         <div class="card" data-category="accessories" data-price="15">
+    <img src="{{ asset('images for website/girls accesories 3.png') }}" alt="Pink Hat and Mittens" />
+    <div class="card-body">
+      <h3>Pink Hat and Mittens</h3>
+      <p>£15.00</p>
+      <p>Pink fluffy hat and mittens set</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 18]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
+    <!-- Outerwear Girls -->
+
+                           <div class="card" data-category="outerwear" data-price="26">
+    <img src="{{ asset('images for website/girls outerwear 1.png') }}" alt="Fluffy flower fleece" />
+    <div class="card-body">
+      <h3>Fluffy fleece</h3>
+      <p>£26.00</p>
+      <p>Fluffy white fleece with flower patterns</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 19]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
+  
+                           <div class="card" data-category="outerwear" data-price="24">
+    <img src="{{ asset('images for website/girls outerwear 2.png') }}" alt="Fluffy fleece" />
+    <div class="card-body">
+      <h3>Fluffy fleece</h3>
+      <p>£26.00</p>
+      <p>Fluffy pink cardigan fleece with crosshatch patterns</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 20]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
+  
+                           <div class="card" data-category="outerwear" data-price="20">
+    <img src="{{ asset('images for website/girls outerwear 3.png') }}" alt="Denim jacket" />
+    <div class="card-body">
+      <h3>Denim jacket</h3>
+      <p>£20.00</p>
+      <p>Denim jacket with heart patterns</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 21]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
+<!-- Girls Shoes-->
+                           <div class="card" data-category="shoes" data-price="20">
+    <img src="{{ asset('images for website/girls shoes 1.png') }}" alt="Pink Trainers" />
+    <div class="card-body">
+      <h3>Pink Trainers</h3>
+      <p>£20.00</p>
+      <p>Pink trainers with strap</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 22]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
+                             <div class="card" data-category="shoes" data-price="23">
+    <img src="{{ asset('images for website/girls shoes 2.png') }}" alt="Heels" />
+    <div class="card-body">
+      <h3>Pink Heels</h3>
+      <p>£23.00</p>
+      <p>Pink heels with bow</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 23]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
+                               <div class="card" data-category="shoes" data-price="12">
+    <img src="{{ asset('images for website/girls shoes 3.png') }}" alt="Pumps" />
+    <div class="card-body">
+      <h3>Pink Pumps</h3>
+      <p>£12.00</p>
+      <p>Pink heels with heart pattern</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 24]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+ <!-- Girls Tops-->
+                                 <div class="card" data-category="tops" data-price="18">
+    <img src="{{ asset('images for website/girls top 1.png') }}" alt="Jumper" />
+    <div class="card-body">
+      <h3>Rainbow jumper</h3>
+      <p>£18.00</p>
+      <p>Rainbow striped jumper with unicorn</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 25]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
+                                   <div class="card" data-category="tops" data-price="15">
+    <img src="{{ asset('images for website/girls top 2.png') }}" alt="T-shirt" />
+    <div class="card-body">
+      <h3>T-shirt</h3>
+      <p>£15.00</p>
+      <p>Yellow T-shirt with flowers</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 26]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
+                                     <div class="card" data-category="tops" data-price="20">
+    <img src="{{ asset('images for website/girls top 3.png') }}" alt="Longsleeve shirt" />
+    <div class="card-body">
+      <h3>Longsleeve shirt</h3>
+      <p>£20.00</p>
+      <p>Pink longsleeve shirt with buttons</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 27]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Girls Trousers-->
+
+                                        <div class="card" data-category="trousers" data-price="15">
+    <img src="{{ asset('images for website/girls bottom 1.png') }}" alt="Skirt" />
+    <div class="card-body">
+      <h3>Skirt</h3>
+      <p>£15.00</p>
+      <p>Pink skirt with heart patterns</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 28]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
+                                          <div class="card" data-category="trousers" data-price="15">
+    <img src="{{ asset('images for website/girls bottom 2.png') }}" alt="Denim Skirt" />
+    <div class="card-body">
+      <h3>Denim Skirt</h3>
+      <p>£15.00</p>
+      <p>Denim skirt with unicorns</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 29]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
+                                          <div class="card" data-category="trousers" data-price="15">
+    <img src="{{ asset('images for website/girls bottom 3.png') }}" alt="Denim Jeans" />
+    <div class="card-body">
+      <h3>Denim Jeans</h3>
+      <p>£20.00</p>
+      <p>Denim pink jeans with star patterns</p>
+      <p class="stock">In Stock</p>
+      <form method="POST" action="{{ route('basket.add', ['productId' => 30]) }}">
+        @csrf
+        <button class="btn" type="submit">Add to Basket</button>
+      </form>
+    </div>
+  </div>
+
 </section>
 @endsection
