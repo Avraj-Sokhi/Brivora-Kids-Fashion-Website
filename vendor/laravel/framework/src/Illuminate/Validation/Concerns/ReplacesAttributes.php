@@ -22,7 +22,11 @@ trait ReplacesAttributes
 
         $parameters[0] = $this->getDisplayableAttribute($parameters[0]);
 
-        return $this->replaceWhileKeepingCase($message, ['other' => $parameters[0], 'value' => $parameters[1]]);
+        return str_replace(
+            [':other', ':OTHER', ':Other', ':value', ':VALUE', ':Value'],
+            [$parameters[0], Str::upper($parameters[0]), Str::ucfirst($parameters[0]), $parameters[1], Str::upper($parameters[1]), Str::ucfirst($parameters[1])],
+            $message
+        );
     }
 
     /**
@@ -333,7 +337,11 @@ trait ReplacesAttributes
     {
         $value = $this->getDisplayableAttribute($parameters[0]);
 
-        return $this->replaceWhileKeepingCase($message, ['other' => $value]);
+        return str_replace(
+            [':other', ':OTHER', ':Other'],
+            [$value, Str::upper($value), Str::ucfirst($value)],
+            $message
+        );
     }
 
     /**
@@ -621,7 +629,11 @@ trait ReplacesAttributes
     {
         $value = $this->getDisplayableAttribute($parameters[0]);
 
-        return $this->replaceWhileKeepingCase($message, ['other' => $value]);
+        return str_replace(
+            [':other', ':OTHER', ':Other'],
+            [$value, Str::upper($value), Str::ucfirst($value)],
+            $message
+        );
     }
 
     /**
@@ -762,7 +774,11 @@ trait ReplacesAttributes
     {
         $value = $this->getDisplayableAttribute($parameters[0]);
 
-        return $this->replaceWhileKeepingCase($message, ['other' => $value]);
+        return str_replace(
+            [':other', ':OTHER', ':Other'],
+            [$value, Str::upper($value), Str::ucfirst($value)],
+            $message
+        );
     }
 
     /**
@@ -929,29 +945,5 @@ trait ReplacesAttributes
     protected function replaceDoesntContain($message, $attribute, $rule, $parameters)
     {
         return $this->replaceIn($message, $attribute, $rule, $parameters);
-    }
-
-    /**
-     * Replace the given string while maintaining different casing variants.
-     *
-     * @param  array<string, string>  $mapping
-     */
-    private function replaceWhileKeepingCase(string $message, array $mapping): string
-    {
-        $fn = [fn ($v) => $v, Str::upper(...), Str::ucfirst(...)];
-
-        $cases = array_reduce(
-            array_keys($mapping),
-            fn (array $carry, string $placeholder) => [...$carry, ...array_map(fn (callable $fn) => ':'.$fn($placeholder), $fn)],
-            [],
-        );
-
-        $replacements = array_reduce(
-            array_values($mapping),
-            fn (array $carry, string $parameter) => [...$carry, ...array_map(fn (callable $fn) => $fn($parameter), $fn)],
-            [],
-        );
-
-        return str_replace($cases, $replacements, $message);
     }
 }
