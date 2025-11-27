@@ -463,3 +463,8 @@
 
 </section>
 @endsection
+
+<!--TODO: Whoever is making basket page Link to basket.add once basket page is ready.
+ <form method="POST" action="{{ route('basket.add', ['productId' => 18]) }}"> -->
+  
+ 

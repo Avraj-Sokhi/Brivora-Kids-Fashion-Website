@@ -9,4 +9,9 @@ Route::get('/', function () {
 });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::post('/basket/add/{productId}', [BasketController::class, 'add'])->name('basket.add');
+
+Route::post('/basket/add/{productsId}', [BasketController::class, 'add'])->name('basket.add');
+
+//Route::get('/products', function () {
+ //  return view('products');
+//});
