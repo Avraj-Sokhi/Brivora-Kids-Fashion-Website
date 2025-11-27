@@ -5,6 +5,7 @@ vendor/
 .phpunit.result.cache
 storage/
 bootstrap/cache/
+storage/logs/laravel.log
 
 # Node & Vite
 node_modules/
