@@ -232,13 +232,13 @@ class NotificationSender
                 $connection = $notification->connection;
 
                 if (method_exists($notification, 'viaConnections')) {
-                    $connection = $notification->viaConnections()[$channel] ?? $connection;
+                    $connection = $notification->viaConnections()[$channel] ?? null;
                 }
 
                 $queue = $notification->queue;
 
                 if (method_exists($notification, 'viaQueues')) {
-                    $queue = $notification->viaQueues()[$channel] ?? $queue;
+                    $queue = $notification->viaQueues()[$channel] ?? null;
                 }
 
                 $delay = $notification->delay;

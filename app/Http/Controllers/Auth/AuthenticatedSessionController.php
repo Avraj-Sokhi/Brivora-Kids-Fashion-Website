@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,24 +21,22 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $request->authenticate();
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        $request->session()->regenerate();
+        if (Auth::attempt($validated, $request->boolean('remember'))) {
+            $request->session()->regenerate();
 
-        $user = $request->user();
+            return redirect()->intended(route('dashboard', absolute: false));
+        }
 
-    //force first time password change
-    if ($user->must_change_password) {
-        return redirect()->route('password.change.form');
-    }
-    // redirect admin users
-      if ($user->role === 'admin') {
-        return redirect()->route('admin.dashboard');
-    }
-    //redirect customers
-        return redirect()->route('dashboard');
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 
     /**
@@ -47,7 +44,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        Auth::logout();
 
         $request->session()->invalidate();
 

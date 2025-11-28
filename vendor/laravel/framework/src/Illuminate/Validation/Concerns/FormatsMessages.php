@@ -103,12 +103,10 @@ trait FormatsMessages
 
         $keys = ["{$attribute}.{$lowerRule}", $lowerRule, $attribute];
 
-        if ($this->getAttributeType($attribute) !== 'file') {
-            $shortRule = "{$attribute}.".Str::snake(class_basename($lowerRule));
+        $shortRule = "{$attribute}.".Str::snake(class_basename($lowerRule));
 
-            if (! in_array($shortRule, $keys)) {
-                $keys[] = $shortRule;
-            }
+        if (! in_array($shortRule, $keys)) {
+            $keys[] = $shortRule;
         }
 
         // First we will check for a custom message for an attribute specific rule

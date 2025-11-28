@@ -2,10 +2,8 @@
 
 namespace Illuminate\JsonSchema\Types;
 
-use BackedEnum;
 use Illuminate\JsonSchema\JsonSchema;
 use Illuminate\JsonSchema\Serializer;
-use InvalidArgumentException;
 
 abstract class Type extends JsonSchema
 {
@@ -88,19 +86,11 @@ abstract class Type extends JsonSchema
     /**
      * Restrict the value to one of the provided enumerated values.
      *
-     * @param  class-string<\BackedEnum>|array<int, mixed>  $values
+     * @param  array<int, mixed>  $values
      */
-    public function enum(array|string $values): static
+    public function enum(array $values): static
     {
-        if (is_string($values)) {
-            if (! is_subclass_of($values, BackedEnum::class)) {
-                throw new InvalidArgumentException('The provided class must be a BackedEnum.');
-            }
-
-            $values = array_column($values::cases(), 'value');
-        }
-
-        // Keep order and allow complex values (arrays / objects) without forcing uniqueness...
+        // Keep order and allow complex values (arrays/objects) without forcing uniqueness...
         $this->enum = array_values($values);
 
         return $this;
