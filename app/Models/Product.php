@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
-    /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
 
     /**
@@ -101,7 +100,7 @@ class Product extends Model
      */
     public function getFormattedPriceAttribute(): string
     {
-        return '$' . number_format((float) $this->price, 2);
+        return '£' . number_format((float) $this->price, 2);
     }
 
     /**
