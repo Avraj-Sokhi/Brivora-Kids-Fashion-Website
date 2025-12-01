@@ -1,73 +1,84 @@
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-    <div class="w-full sm:max-w-md px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-        <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-6">
-            {{ config('app.name') }} - Login
-        </h2>
+@extends('layouts.app')
 
-        <!-- Session Status -->
-        @if ($errors->any())
-            <div class="mb-4 p-4 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-200 rounded">
-                <ul class="list-disc pl-5">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+@section('content')
+<div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 48px 16px; background: linear-gradient(135deg, rgba(249, 240, 245, 1), rgba(254, 245, 230, 1));">
+    <div style="width: 100%; max-width: 448px; background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; border: 2px solid #fce7f3;">
+        <div style="padding: 24px; background: linear-gradient(135deg, #ec4899, #f97316); color: white;">
+            <h2 style="text-align: center; font-size: 28px; font-weight: bold; margin: 0; font-family: 'Fredoka One', cursive;">
+                Login
+            </h2>
+        </div>
+        <div style="padding: 24px;">
+            <!-- Session Status -->
+            @if ($errors->any())
+                <div style="margin-bottom: 16px; padding: 16px; background-color: #fee2e2; border-left: 4px solid #ef4444; color: #dc2626; border-radius: 4px;">
+                    <ul style="list-style-type: disc; padding-left: 20px; margin: 0; gap: 4px;">
+                        @foreach ($errors->all() as $error)
+                            <li style="margin: 4px 0;">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+            <form method="POST" action="{{ route('login') }}" style="width: 100%;">
+                @csrf
 
-            <!-- Email Address -->
-            <div class="mb-4">
-                <label for="email" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
-                    Email Address
-                </label>
-                <input id="email" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:text-white @error('email') border-red-500 @enderror" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" />
-                @error('email')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+                <!-- Email Address -->
+                <div style="margin-bottom: 20px;">
+                    <label for="email" style="display: block; color: #374151; font-size: 14px; font-weight: bold; margin-bottom: 8px;">
+                        Email Address
+                    </label>
+                    <input id="email" style="width: 100%; padding: 8px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px; box-sizing: border-box; transition: border-color 0.2s; @error('email') border-color: #ef4444; @enderror" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" onfocus="this.style.borderColor='#ec4899'; this.style.boxShadow='0 0 0 3px rgba(236, 72, 153, 0.1)'" onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'" />
+                    @error('email')
+                        <p style="color: #ef4444; font-size: 12px; margin-top: 4px;">{{ $message }}</p>
+                    @enderror
+                </div>
 
-            <!-- Password -->
-            <div class="mb-4">
-                <label for="password" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
-                    Password
-                </label>
-                <input id="password" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:text-white @error('password') border-red-500 @enderror" type="password" name="password" required autocomplete="current-password" />
-                @error('password')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+                <!-- Password -->
+                <div style="margin-bottom: 16px;">
+                    <label for="password" style="display: block; color: #374151; font-size: 14px; font-weight: bold; margin-bottom: 8px;">
+                        Password
+                    </label>
+                    <input id="password" style="width: 100%; padding: 8px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px; box-sizing: border-box; transition: border-color 0.2s; @error('password') border-color: #ef4444; @enderror" type="password" name="password" required autocomplete="current-password" onfocus="this.style.borderColor='#ec4899'; this.style.boxShadow='0 0 0 3px rgba(236, 72, 153, 0.1)'" onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'" />
+                    @error('password')
+                        <p style="color: #ef4444; font-size: 12px; margin-top: 4px;">{{ $message }}</p>
+                    @enderror
+                </div>
 
-            <!-- Remember Me -->
-            <div class="mb-4 flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-pink-600 shadow-sm focus:ring-pink-500 dark:focus:ring-pink-600 dark:checked:bg-pink-600" name="remember" />
-                <label for="remember_me" class="ml-2 text-sm text-gray-600 dark:text-gray-400">
-                    Remember me
-                </label>
-            </div>
+                <!-- Remember Me -->
+                <div style="margin-bottom: 24px; display: flex; align-items: center;">
+                    <input id="remember_me" type="checkbox" style="width: 16px; height: 16px; border: 1px solid #d1d5db; border-radius: 4px; cursor: pointer;" name="remember" />
+                    <label for="remember_me" style="margin-left: 8px; font-size: 14px; color: #4b5563; cursor: pointer;">
+                        Remember me
+                    </label>
+                </div>
 
-            <div class="flex items-center justify-between">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                        Forgot your password?
-                    </a>
-                @endif
-
-                <button type="submit" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
-                    Log in
+                <!-- Login Button -->
+                <button type="submit" style="width: 100%; background: linear-gradient(135deg, #ec4899, #f97316); color: white; font-weight: bold; padding: 12px 16px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s; font-size: 16px;" onmouseover="this.style.opacity='0.9'; this.style.transform='scale(1.02)'" onmouseout="this.style.opacity='1'; this.style.transform='scale(1)'">
+                    Log In
                 </button>
-            </div>
-        </form>
+            </form>
 
-        <div class="mt-6 text-center">
-            <p class="text-gray-600 dark:text-gray-400 text-sm">
-                Don't have an account?
-                <a href="{{ route('register') }}" class="text-pink-600 dark:text-pink-400 hover:underline font-bold">
-                    Register here
-                </a>
-            </p>
+            <!-- Forgot Password & Register Links -->
+            <div style="margin-top: 24px; text-align: center;">
+                @if (Route::has('password.request'))
+                    <div style="margin-bottom: 12px;">
+                        <a style="font-size: 12px; color: #ec4899; text-decoration: none; font-weight: 600; cursor: pointer;" href="{{ route('password.request') }}">
+                            Forgot your password?
+                        </a>
+                    </div>
+                @endif
+                <div style="border-top: 1px solid #e5e7eb; padding-top: 12px;">
+                    <p style="color: #4b5563; font-size: 14px; margin: 0;">
+                        Don't have an account?
+                        <a href="{{ route('register') }}" style="color: #ec4899; text-decoration: none; font-weight: bold;">
+                            Register here
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+@endsection

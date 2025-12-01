@@ -9,5 +9,5 @@ class AgeGroup extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'min_age','max_age'];
+    protected $fillable = ['name', 'min_age', 'max_age'];
 }
