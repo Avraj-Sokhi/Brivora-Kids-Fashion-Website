@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\AgeGroup;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -12,291 +14,87 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $products = [
-            // Accessories Boys
-            [
-                'name' => 'Minecraft Beanie',
-                'description' => 'Knitted hat with Creeper patch.',
-                'price' => 10.00,
-                'category_id' => 1,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Fleece Mittens',
-                'description' => 'Soft navy mittens for winter.',
-                'price' => 8.00,
-                'category_id' => 1,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Kids Backpack',
-                'description' => 'Sporty backpack with patches.',
-                'price' => 18.00,
-                'category_id' => 1,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            // Outerwear Boys
-            [
-                'name' => 'Rabbit Jacket',
-                'description' => 'Quilted navy jacket with rabbit patch.',
-                'price' => 35.00,
-                'category_id' => 2,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Puffer Jacket',
-                'description' => 'Blue puffer with striped cuffs.',
-                'price' => 30.00,
-                'category_id' => 2,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Tractor Fleece',
-                'description' => 'Fleece coat with tractor print.',
-                'price' => 28.00,
-                'category_id' => 2,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            // Shoes Boys
-            [
-                'name' => 'Black high top',
-                'description' => 'Warm sneaker with fuzzy lining.',
-                'price' => 22.00,
-                'category_id' => 3,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Marvel Sneaker',
-                'description' => 'Superhero-themed high-top sneaker.',
-                'price' => 24.00,
-                'category_id' => 3,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Jurassic Sneaker',
-                'description' => 'Dinosaur-themed canvas sneaker.',
-                'price' => 26.00,
-                'category_id' => 3,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            // Tops Boys
-            [
-                'name' => 'Navy Polo Shirt',
-                'description' => 'Classic polo with white collar.',
-                'price' => 16.00,
-                'category_id' => 4,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Racecar Shirt',
-                'description' => 'Striped shirt with embroidered racecars.',
-                'price' => 14.00,
-                'category_id' => 4,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Dinosaur Shirt',
-                'description' => 'Fun dino-themed long sleeve shirt.',
-                'price' => 15.00,
-                'category_id' => 4,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            // Trousers Boys
-            [
-                'name' => 'Planet Joggers',
-                'description' => 'Space-themed joggers with planet embroidery.',
-                'price' => 18.00,
-                'category_id' => 5,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Dino Joggers',
-                'description' => 'Elastic joggers with pastel dinosaur print.',
-                'price' => 17.00,
-                'category_id' => 5,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Pokémon Joggers',
-                'description' => 'Black joggers with Pikachu and other pokemons.',
-                'price' => 20.00,
-                'category_id' => 5,
-                'age_group_id' => 1,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            // Accessories Girls
-            [
-                'name' => 'Pink Backpack',
-                'description' => 'Fun Pink backpack with eyes and rainbows',
-                'price' => 15.00,
-                'category_id' => 1,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Pink Barbie Cap',
-                'description' => 'Pink cap with barbie signature',
-                'price' => 10.00,
-                'category_id' => 1,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Pink Hat and Mittens',
-                'description' => 'Pink fluffy hat and mittens set',
-                'price' => 15.00,
-                'category_id' => 1,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            // Outerwear Girls
-            [
-                'name' => 'Fluffy fleece',
-                'description' => 'Fluffy white fleece with flower patterns',
-                'price' => 26.00,
-                'category_id' => 2,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Pink Fluffy Cardigan',
-                'description' => 'Fluffy pink cardigan fleece with crosshatch patterns',
-                'price' => 24.00,
-                'category_id' => 2,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Denim jacket',
-                'description' => 'Denim jacket with heart patterns',
-                'price' => 20.00,
-                'category_id' => 2,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            // Girls Shoes
-            [
-                'name' => 'Pink Trainers',
-                'description' => 'Pink trainers with strap',
-                'price' => 20.00,
-                'category_id' => 3,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Pink Heels',
-                'description' => 'Pink heels with bow',
-                'price' => 23.00,
-                'category_id' => 3,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Pink Pumps',
-                'description' => 'Pink heels with heart pattern',
-                'price' => 12.00,
-                'category_id' => 3,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            // Girls Tops
-            [
-                'name' => 'Rainbow jumper',
-                'description' => 'Rainbow striped jumper with unicorn',
-                'price' => 18.00,
-                'category_id' => 4,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Yellow T-shirt',
-                'description' => 'Yellow T-shirt with flowers',
-                'price' => 15.00,
-                'category_id' => 4,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Pink Longsleeve shirt',
-                'description' => 'Pink longsleeve shirt with buttons',
-                'price' => 20.00,
-                'category_id' => 4,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            // Girls Trousers
-            [
-                'name' => 'Pink Skirt',
-                'description' => 'Pink skirt with heart patterns',
-                'price' => 15.00,
-                'category_id' => 5,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Denim Skirt',
-                'description' => 'Denim skirt with unicorns',
-                'price' => 15.00,
-                'category_id' => 5,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
-            [
-                'name' => 'Denim Jeans',
-                'description' => 'Denim pink jeans with star patterns',
-                'price' => 20.00,
-                'category_id' => 5,
-                'age_group_id' => 2,
-                'stock_quantity' => 50,
-                'status' => 'active',
-            ],
+        // Create categories if they don't exist
+        $categories = [
+            'Accessories' => Category::firstOrCreate(['name' => 'Accessories', 'slug' => 'accessories']),
+            'Outerwear' => Category::firstOrCreate(['name' => 'Outerwear', 'slug' => 'outerwear']),
+            'Shoes' => Category::firstOrCreate(['name' => 'Shoes', 'slug' => 'shoes']),
+            'Tops' => Category::firstOrCreate(['name' => 'Tops', 'slug' => 'tops']),
+            'Trousers' => Category::firstOrCreate(['name' => 'Trousers', 'slug' => 'trousers']),
         ];
 
-        foreach ($products as $product) {
-            Product::create($product);
+        // Create age groups if they don't exist
+        $ageGroups = [
+            'Boys' => AgeGroup::firstOrCreate(['name' => 'Boys'], ['min_age' => 2, 'max_age' => 12]),
+            'Girls' => AgeGroup::firstOrCreate(['name' => 'Girls'], ['min_age' => 2, 'max_age' => 12]),
+        ];
+
+        // Sample products matching the products.blade.php
+        $products = [
+            // Boys Accessories
+            ['name' => 'Minecraft Beanie', 'price' => 10.00, 'category' => 'Accessories', 'age_group' => 'Boys', 'description' => 'Knitted hat with Creeper patch.'],
+            ['name' => 'Fleece Mittens', 'price' => 8.00, 'category' => 'Accessories', 'age_group' => 'Boys', 'description' => 'Soft navy mittens for winter.'],
+            ['name' => 'Kids Backpack', 'price' => 18.00, 'category' => 'Accessories', 'age_group' => 'Boys', 'description' => 'Sporty backpack with patches.'],
+
+            // Boys Outerwear
+            ['name' => 'Rabbit Jacket', 'price' => 35.00, 'category' => 'Outerwear', 'age_group' => 'Boys', 'description' => 'Quilted navy jacket with rabbit patch.'],
+            ['name' => 'Puffer Jacket', 'price' => 30.00, 'category' => 'Outerwear', 'age_group' => 'Boys', 'description' => 'Blue puffer with striped cuffs.'],
+            ['name' => 'Tractor Fleece', 'price' => 28.00, 'category' => 'Outerwear', 'age_group' => 'Boys', 'description' => 'Fleece coat with tractor print.'],
+
+            // Boys Shoes
+            ['name' => 'Black High Top', 'price' => 22.00, 'category' => 'Shoes', 'age_group' => 'Boys', 'description' => 'Warm sneaker with fuzzy lining.'],
+            ['name' => 'Marvel Sneaker', 'price' => 24.00, 'category' => 'Shoes', 'age_group' => 'Boys', 'description' => 'Superhero-themed high-top sneaker.'],
+            ['name' => 'Jurassic Sneaker', 'price' => 26.00, 'category' => 'Shoes', 'age_group' => 'Boys', 'description' => 'Dinosaur-themed canvas sneaker.'],
+
+            // Boys Tops
+            ['name' => 'Navy Polo Shirt', 'price' => 16.00, 'category' => 'Tops', 'age_group' => 'Boys', 'description' => 'Classic polo with white collar.'],
+            ['name' => 'Racecar Shirt', 'price' => 14.00, 'category' => 'Tops', 'age_group' => 'Boys', 'description' => 'Striped shirt with embroidered racecars.'],
+            ['name' => 'Dinosaur Shirt', 'price' => 15.00, 'category' => 'Tops', 'age_group' => 'Boys', 'description' => 'Fun dino-themed long sleeve shirt.'],
+
+            // Boys Trousers
+            ['name' => 'Planet Joggers', 'price' => 18.00, 'category' => 'Trousers', 'age_group' => 'Boys', 'description' => 'Space-themed joggers with planet embroidery.'],
+            ['name' => 'Dino Joggers', 'price' => 17.00, 'category' => 'Trousers', 'age_group' => 'Boys', 'description' => 'Elastic joggers with pastel dinosaur print.'],
+            ['name' => 'Pokémon Joggers', 'price' => 20.00, 'category' => 'Trousers', 'age_group' => 'Boys', 'description' => 'Black joggers with Pikachu and other pokemons.'],
+
+            // Girls Accessories
+            ['name' => 'Pink Backpack', 'price' => 15.00, 'category' => 'Accessories', 'age_group' => 'Girls', 'description' => 'Fun Pink backpack with eyes and rainbows'],
+            ['name' => 'Pink Barbie Cap', 'price' => 10.00, 'category' => 'Accessories', 'age_group' => 'Girls', 'description' => 'Pink cap with barbie signature'],
+            ['name' => 'Pink Hat and Mittens', 'price' => 15.00, 'category' => 'Accessories', 'age_group' => 'Girls', 'description' => 'Pink fluffy hat and mittens set'],
+
+            // Girls Outerwear
+            ['name' => 'Fluffy Fleece', 'price' => 26.00, 'category' => 'Outerwear', 'age_group' => 'Girls', 'description' => 'Fluffy white fleece with flower patterns'],
+            ['name' => 'Pink Cardigan Fleece', 'price' => 24.00, 'category' => 'Outerwear', 'age_group' => 'Girls', 'description' => 'Fluffy pink cardigan fleece with crosshatch patterns'],
+            ['name' => 'Denim Jacket', 'price' => 20.00, 'category' => 'Outerwear', 'age_group' => 'Girls', 'description' => 'Denim jacket with heart patterns'],
+
+            // Girls Shoes
+            ['name' => 'Pink Trainers', 'price' => 20.00, 'category' => 'Shoes', 'age_group' => 'Girls', 'description' => 'Pink trainers with strap'],
+            ['name' => 'Pink Heels', 'price' => 23.00, 'category' => 'Shoes', 'age_group' => 'Girls', 'description' => 'Pink heels with bow'],
+            ['name' => 'Pink Pumps', 'price' => 12.00, 'category' => 'Shoes', 'age_group' => 'Girls', 'description' => 'Pink heels with heart pattern'],
+
+            // Girls Tops
+            ['name' => 'Rainbow Jumper', 'price' => 18.00, 'category' => 'Tops', 'age_group' => 'Girls', 'description' => 'Rainbow striped jumper with unicorn'],
+            ['name' => 'Yellow T-shirt', 'price' => 15.00, 'category' => 'Tops', 'age_group' => 'Girls', 'description' => 'Yellow T-shirt with flowers'],
+            ['name' => 'Pink Longsleeve Shirt', 'price' => 20.00, 'category' => 'Tops', 'age_group' => 'Girls', 'description' => 'Pink longsleeve shirt with buttons'],
+
+            // Girls Trousers
+            ['name' => 'Pink Heart Skirt', 'price' => 15.00, 'category' => 'Trousers', 'age_group' => 'Girls', 'description' => 'Pink skirt with heart patterns'],
+            ['name' => 'Denim Unicorn Skirt', 'price' => 15.00, 'category' => 'Trousers', 'age_group' => 'Girls', 'description' => 'Denim skirt with unicorns'],
+            ['name' => 'Pink Star Jeans', 'price' => 20.00, 'category' => 'Trousers', 'age_group' => 'Girls', 'description' => 'Denim pink jeans with star patterns'],
+        ];
+
+        foreach ($products as $productData) {
+            Product::firstOrCreate(
+                ['name' => $productData['name']],
+                [
+                    'slug' => \Illuminate\Support\Str::slug($productData['name']),
+                    'description' => $productData['description'],
+                    'price' => $productData['price'],
+                    'stock' => rand(10, 50),
+                    'is_active' => true,
+                    'category_id' => $categories[$productData['category']]->id,
+                    'age_group_id' => $ageGroups[$productData['age_group']]->id,
+                ]
+            );
         }
     }
 }

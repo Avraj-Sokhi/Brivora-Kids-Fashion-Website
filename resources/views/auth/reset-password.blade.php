@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
     <div class="w-full sm:max-w-md px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
         <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-6">
@@ -59,3 +62,5 @@
         </form>
     </div>
 </div>
+
+@endsection

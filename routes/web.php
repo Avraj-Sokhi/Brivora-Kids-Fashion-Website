@@ -17,15 +17,22 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-  Route::get('/password/change', [PasswordChangeController::class, 'showForm'])
-      ->name('password.change.form');
+    Route::get('/password/change', [PasswordChangeController::class, 'showForm'])
+        ->name('password.change.form');
 
     Route::post('/password/change', [PasswordChangeController::class, 'update'])
         ->name('password.change.update');
 
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
+// Product routes
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+// Basket routes
+Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
 Route::post('/basket/add/{productId}', [BasketController::class, 'add'])->name('basket.add');
+Route::patch('/basket/update/{productId}', [BasketController::class, 'update'])->name('basket.update');
+Route::delete('/basket/remove/{productId}', [BasketController::class, 'remove'])->name('basket.remove');
+Route::delete('/basket/clear', [BasketController::class, 'clear'])->name('basket.clear');
