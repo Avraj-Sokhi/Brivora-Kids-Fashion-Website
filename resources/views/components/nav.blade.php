@@ -1,6 +1,7 @@
 <nav>
   <a href="{{ route('products.index') }}">Home</a>
-  <a href="{{ url('/about') }}">About Us</a>
+  <a href="{{ route('about') }}">About Us</a>
+  <a href="{{ route('contact.index') }}">Contact Us</a>
   <a href="{{ route('basket.index') }}" style="position: relative; font-weight: bold;">
     🛒 Basket
     @php
@@ -19,6 +20,21 @@
       </span>
     @endif
   </a>
-  <a href="{{ url('/login') }}">Login/Register</a>
-  <a href="{{ url('/account') }}">My Account</a>
+
+  @auth
+    <a href="{{ route('dashboard') }}">Dashboard</a>
+    <a href="{{ route('profile.edit') }}">Profile</a>
+    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+      @csrf
+      <button type="submit"
+        style="background: none; border: none; color: #fff; margin: 0 1rem; font-weight: bold; font-family: 'Comic Neue', cursive; cursor: pointer; transition: color 0.3s;"
+        onmouseover="this.style.color='#ffeb3b'; this.style.textDecoration='underline'"
+        onmouseout="this.style.color='#fff'; this.style.textDecoration='none'">
+        Logout
+      </button>
+    </form>
+  @else
+    <a href="{{ route('login') }}">Login</a>
+    <a href="{{ route('register') }}">Register</a>
+  @endauth
 </nav>

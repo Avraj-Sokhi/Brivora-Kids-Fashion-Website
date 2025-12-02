@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PasswordChangeController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BasketController;
+use App\Http\Controllers\AboutController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,3 +41,16 @@ Route::post('/basket/add/{productId}', [BasketController::class, 'add'])->name('
 Route::patch('/basket/update/{productId}', [BasketController::class, 'update'])->name('basket.update');
 Route::delete('/basket/remove/{productId}', [BasketController::class, 'remove'])->name('basket.remove');
 Route::delete('/basket/clear', [BasketController::class, 'clear'])->name('basket.clear');
+
+// About Us page
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+// Contact Us routes
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+
+// Checkout routes
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');

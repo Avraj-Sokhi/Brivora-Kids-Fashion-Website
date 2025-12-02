@@ -104,7 +104,7 @@
                             Continue Shopping
                         </a>
 
-                        <a href="#" class="btn"
+                        <a href="{{ route('checkout.index') }}" class="btn"
                             style="background: #4caf50; text-decoration: none; display: inline-block; font-size: 1.1rem; padding: 0.7rem 1.5rem;">
                             Proceed to Checkout
                         </a>
