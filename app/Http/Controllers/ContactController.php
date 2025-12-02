@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactMessage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -28,15 +29,15 @@ class ContactController extends Controller
             'message' => 'required|string|max:2000',
         ]);
 
-        // In a real application, you would send an email here
-        // For now, we'll just flash a success message
-
-        // Example email sending (commented out):
-        // Mail::send('emails.contact', $validated, function($message) use ($validated) {
-        //     $message->to('info@brivorakids.com')
-        //             ->subject('Contact Form: ' . $validated['subject'])
-        //             ->from($validated['email'], $validated['name']);
-        // });
+        // Save the message to the database
+        ContactMessage::create([
+            'user_id' => Auth::id(), // Will be null if guest, or user ID if logged in
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'subject' => $validated['subject'],
+            'message' => $validated['message'],
+            'status' => 'new', // Default status
+        ]);
 
         // Flash success message
         return redirect()->route('contact.index')->with('success', 'Thank you for contacting us! We\'ll get back to you soon. 📧');
