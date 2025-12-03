@@ -51,7 +51,7 @@
 
     <!-- Accessories Boys -->
     <div class="card" data-category="accessories" data-price="10">
-      <img src="{{ asset('images for website/Accessory 1.png') }}" alt="Minecraft Beanie" />
+      <img src="{{ asset('images for website/Accessory 1.png') }}" alt="Minecraft Beanie" loading="lazy" />
       <div class="card-body">
         <h3>Minecraft Beanie</h3>
         <p>£10.00</p>
@@ -65,7 +65,7 @@
     </div>
 
     <div class="card" data-category="accessories" data-price="8">
-      <img src="{{ asset('images for website/Accessory 2.png') }}" alt="Fleece Mittens" />
+      <img src="{{ asset('images for website/Accessory 2.png') }}" alt="Fleece Mittens" loading="lazy" />
       <div class="card-body">
         <h3>Fleece Mittens</h3>
         <p>£8.00</p>
@@ -79,7 +79,7 @@
     </div>
 
     <div class="card" data-category="accessories" data-price="18">
-      <img src="{{ asset('images for website/Accessory 3.png') }}" alt="Kids Backpack" />
+      <img src="{{ asset('images for website/Accessory 3.png') }}" alt="Kids Backpack" loading="lazy" />
       <div class="card-body">
         <h3>Kids Backpack</h3>
         <p>£18.00</p>
@@ -94,7 +94,7 @@
 
     <!-- Outerwear Boys -->
     <div class="card" data-category="outerwear" data-price="35">
-      <img src="{{ asset('images for website/Outerwear 1.png') }}" alt="Rabbit Jacket" />
+      <img src="{{ asset('images for website/Outerwear 1.png') }}" alt="Rabbit Jacket" loading="lazy" />
       <div class="card-body">
         <h3>Rabbit Jacket</h3>
         <p>£35.00</p>
@@ -108,7 +108,7 @@
     </div>
 
     <div class="card" data-category="outerwear" data-price="30">
-      <img src="{{ asset('images for website/Outerwear 2.png') }}" alt="Puffer jacket" />
+      <img src="{{ asset('images for website/Outerwear 2.png') }}" alt="Puffer jacket" loading="lazy" />
       <div class="card-body">
         <h3>Puffer Jacket</h3>
         <p>£30.00</p>
@@ -122,7 +122,7 @@
     </div>
 
     <div class="card" data-category="outerwear" data-price="28">
-      <img src="{{ asset('images for website/Outerwear 3.png') }}" alt="Tractor Fleece" />
+      <img src="{{ asset('images for website/Outerwear 3.png') }}" alt="Tractor Fleece" loading="lazy" />
       <div class="card-body">
         <h3>Tractor Fleece</h3>
         <p>£28.00</p>
@@ -137,7 +137,7 @@
 
     <!--Shoes Boys-->
     <div class="card" data-category="shoes" data-price="22">
-      <img src="{{ asset('images for website/Shoe 1.png') }}" alt="Black high top" />
+      <img src="{{ asset('images for website/Shoe 1.png') }}" alt="Black high top" loading="lazy" />
       <div class="card-body">
         <h3>Black high top</h3>
         <p>£22.00</p>
@@ -151,7 +151,7 @@
     </div>
 
     <div class="card" data-category="shoes" data-price="24">
-      <img src="{{ asset('images for website/Shoe 2.png') }}" alt="Marvel Sneaker" />
+      <img src="{{ asset('images for website/Shoe 2.png') }}" alt="Marvel Sneaker" loading="lazy" />
       <div class="card-body">
         <h3>Marvel Sneaker</h3>
         <p>£24.00</p>
@@ -165,7 +165,7 @@
     </div>
 
     <div class="card" data-category="shoes" data-price="26">
-      <img src="{{ asset('images for website/Shoe 3.png') }}" alt="Jurassic Sneaker" />
+      <img src="{{ asset('images for website/Shoe 3.png') }}" alt="Jurassic Sneaker" loading="lazy" />
       <div class="card-body">
         <h3>Jurassic Sneaker</h3>
         <p>£26.00</p>
@@ -180,7 +180,7 @@
 
     <!-- Tops Boys -->
     <div class="card" data-category="tops" data-price="16">
-      <img src="{{ asset('images for website/Top 1.png') }}" alt="Navy Polo Shirt" />
+      <img src="{{ asset('images for website/Top 1.png') }}" alt="Navy Polo Shirt" loading="lazy" />
       <div class="card-body">
         <h3>Navy Polo Shirt</h3>
         <p>£16.00</p>
@@ -194,7 +194,7 @@
     </div>
 
     <div class="card" data-category="tops" data-price="14">
-      <img src="{{ asset('images for website/Top 2.png') }}" alt="Racecar Shirt" />
+      <img src="{{ asset('images for website/Top 2.png') }}" alt="Racecar Shirt" loading="lazy" />
       <div class="card-body">
         <h3>Racecar Shirt</h3>
         <p>£14.00</p>
@@ -208,7 +208,7 @@
     </div>
 
     <div class="card" data-category="tops" data-price="15">
-      <img src="{{ asset('images for website/Top 3.png') }}" alt="Dinosaur Shirt" />
+      <img src="{{ asset('images for website/Top 3.png') }}" alt="Dinosaur Shirt" loading="lazy" />
       <div class="card-body">
         <h3>Dinosaur Shirt</h3>
         <p>£15.00</p>
@@ -223,7 +223,7 @@
 
     <!-- Trousers Boys -->
     <div class="card" data-category="trousers" data-price="18">
-      <img src="{{ asset('images for website/Trousers 1.png') }}" alt="Planet Joggers" />
+      <img src="{{ asset('images for website/Trousers 1.png') }}" alt="Planet Joggers" loading="lazy" />
       <div class="card-body">
         <h3>Planet Joggers</h3>
         <p>£18.00</p>
@@ -237,7 +237,7 @@
     </div>
 
     <div class="card" data-category="trousers" data-price="17">
-      <img src="{{ asset('images for website/Trousers 2.png') }}" alt="Dino Joggers" />
+      <img src="{{ asset('images for website/Trousers 2.png') }}" alt="Dino Joggers" loading="lazy" />
       <div class="card-body">
         <h3>Dino Joggers</h3>
         <p>£17.00</p>
@@ -252,7 +252,7 @@
 
 
     <div class="card" data-category="trousers" data-price="20">
-      <img src="{{ asset('images for website/Trousers 3.png') }}" alt="Pokémon Joggers" />
+      <img src="{{ asset('images for website/Trousers 3.png') }}" alt="Pokémon Joggers" loading="lazy" />
       <div class="card-body">
         <h3>Pokémon Joggers</h3>
         <p>£20.00</p>
@@ -267,7 +267,7 @@
 
     <!-- Accessories Girls -->
     <div class="card" data-category="accessories" data-price="15">
-      <img src="{{ asset('images for website/girls accesories 1.png') }}" alt="Pink Backpack" />
+      <img src="{{ asset('images for website/girls accesories 1.png') }}" alt="Pink Backpack" loading="lazy" />
       <div class="card-body">
         <h3>Pink Backpack</h3>
         <p>£15.00</p>
@@ -281,7 +281,7 @@
     </div>
 
     <div class="card" data-category="accessories" data-price="10">
-      <img src="{{ asset('images for website/girls accesories 2.png') }}" alt="Pink Cap" />
+      <img src="{{ asset('images for website/girls accesories 2.png') }}" alt="Pink Cap" loading="lazy" />
       <div class="card-body">
         <h3>Pink Barbie Cap</h3>
         <p>£10.00</p>
@@ -295,7 +295,7 @@
     </div>
 
     <div class="card" data-category="accessories" data-price="15">
-      <img src="{{ asset('images for website/girls accesories 3.png') }}" alt="Pink Hat and Mittens" />
+      <img src="{{ asset('images for website/girls accesories 3.png') }}" alt="Pink Hat and Mittens" loading="lazy" />
       <div class="card-body">
         <h3>Pink Hat and Mittens</h3>
         <p>£15.00</p>
@@ -311,7 +311,7 @@
     <!-- Outerwear Girls -->
 
     <div class="card" data-category="outerwear" data-price="26">
-      <img src="{{ asset('images for website/girls outerwear 1.png') }}" alt="Fluffy flower fleece" />
+      <img src="{{ asset('images for website/girls outerwear 1.png') }}" alt="Fluffy flower fleece" loading="lazy" />
       <div class="card-body">
         <h3>Fluffy fleece</h3>
         <p>£26.00</p>
@@ -326,7 +326,7 @@
 
 
     <div class="card" data-category="outerwear" data-price="24">
-      <img src="{{ asset('images for website/girls outerwear 2.png') }}" alt="Fluffy fleece" />
+      <img src="{{ asset('images for website/girls outerwear 2.png') }}" alt="Fluffy fleece" loading="lazy" />
       <div class="card-body">
         <h3>Fluffy fleece</h3>
         <p>£26.00</p>
@@ -341,7 +341,7 @@
 
 
     <div class="card" data-category="outerwear" data-price="20">
-      <img src="{{ asset('images for website/girls outerwear 3.png') }}" alt="Denim jacket" />
+      <img src="{{ asset('images for website/girls outerwear 3.png') }}" alt="Denim jacket" loading="lazy" />
       <div class="card-body">
         <h3>Denim jacket</h3>
         <p>£20.00</p>
@@ -356,7 +356,7 @@
 
     <!-- Girls Shoes-->
     <div class="card" data-category="shoes" data-price="20">
-      <img src="{{ asset('images for website/girls shoes 1.png') }}" alt="Pink Trainers" />
+      <img src="{{ asset('images for website/girls shoes 1.png') }}" alt="Pink Trainers" loading="lazy" />
       <div class="card-body">
         <h3>Pink Trainers</h3>
         <p>£20.00</p>
@@ -370,7 +370,7 @@
     </div>
 
     <div class="card" data-category="shoes" data-price="23">
-      <img src="{{ asset('images for website/girls shoes 2.png') }}" alt="Heels" />
+      <img src="{{ asset('images for website/girls shoes 2.png') }}" alt="Heels" loading="lazy" />
       <div class="card-body">
         <h3>Pink Heels</h3>
         <p>£23.00</p>
@@ -384,7 +384,7 @@
     </div>
 
     <div class="card" data-category="shoes" data-price="12">
-      <img src="{{ asset('images for website/girls shoes 3.png') }}" alt="Pumps" />
+      <img src="{{ asset('images for website/girls shoes 3.png') }}" alt="Pumps" loading="lazy" />
       <div class="card-body">
         <h3>Pink Pumps</h3>
         <p>£12.00</p>
@@ -398,7 +398,7 @@
     </div>
     <!-- Girls Tops-->
     <div class="card" data-category="tops" data-price="18">
-      <img src="{{ asset('images for website/girls top 1.png') }}" alt="Jumper" />
+      <img src="{{ asset('images for website/girls top 1.png') }}" alt="Jumper" loading="lazy" />
       <div class="card-body">
         <h3>Rainbow jumper</h3>
         <p>£18.00</p>
@@ -412,7 +412,7 @@
     </div>
 
     <div class="card" data-category="tops" data-price="15">
-      <img src="{{ asset('images for website/girls top 2.png') }}" alt="T-shirt" />
+      <img src="{{ asset('images for website/girls top 2.png') }}" alt="T-shirt" loading="lazy" />
       <div class="card-body">
         <h3>T-shirt</h3>
         <p>£15.00</p>
@@ -426,7 +426,7 @@
     </div>
 
     <div class="card" data-category="tops" data-price="20">
-      <img src="{{ asset('images for website/girls top 3.png') }}" alt="Longsleeve shirt" />
+      <img src="{{ asset('images for website/girls top 3.png') }}" alt="Longsleeve shirt" loading="lazy" />
       <div class="card-body">
         <h3>Longsleeve shirt</h3>
         <p>£20.00</p>
@@ -442,7 +442,7 @@
     <!-- Girls Trousers-->
 
     <div class="card" data-category="trousers" data-price="15">
-      <img src="{{ asset('images for website/girls bottom 1.png') }}" alt="Skirt" />
+      <img src="{{ asset('images for website/girls bottom 1.png') }}" alt="Skirt" loading="lazy" />
       <div class="card-body">
         <h3>Skirt</h3>
         <p>£15.00</p>
@@ -456,7 +456,7 @@
     </div>
 
     <div class="card" data-category="trousers" data-price="15">
-      <img src="{{ asset('images for website/girls bottom 2.png') }}" alt="Denim Skirt" />
+      <img src="{{ asset('images for website/girls bottom 2.png') }}" alt="Denim Skirt" loading="lazy" />
       <div class="card-body">
         <h3>Denim Skirt</h3>
         <p>£15.00</p>
@@ -470,7 +470,7 @@
     </div>
 
     <div class="card" data-category="trousers" data-price="15">
-      <img src="{{ asset('images for website/girls bottom 3.png') }}" alt="Denim Jeans" />
+      <img src="{{ asset('images for website/girls bottom 3.png') }}" alt="Denim Jeans" loading="lazy" />
       <div class="card-body">
         <h3>Denim Jeans</h3>
         <p>£20.00</p>

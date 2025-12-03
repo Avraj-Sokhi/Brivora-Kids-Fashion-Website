@@ -72,10 +72,15 @@ class BasketController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            // Get cart items from database for authenticated users
+            // Get cart items from database for authenticated users with eager loading
             $cartItems = CartItem::with('product')
                 ->where('user_id', Auth::id())
                 ->get();
+
+            // Calculate total using collection (efficient for small carts)
+            $total = $cartItems->sum(function ($item) {
+                return ($item->product->price ?? 0) * $item->quantity;
+            });
         } else {
             // Get cart items from session for guests
             $cartItems = collect(session()->get('cart', []))->map(function ($item, $productId) {
@@ -91,11 +96,10 @@ class BasketController extends Controller
                     'total' => $item['price'] * $item['quantity'],
                 ];
             });
-        }
 
-        $total = $cartItems->sum(function ($item) {
-            return Auth::check() ? $item->total : $item->total;
-        });
+            // Calculate total from session cart
+            $total = $cartItems->sum('total');
+        }
 
         return view('basket.index', compact('cartItems', 'total'));
     }
