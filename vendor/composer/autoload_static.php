@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit499ff201ed8537cc67e26201ae6954a0
+class ComposerStaticInit457eb9c4ff3ea789ad407985e9271c25
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -536,11 +536,15 @@ class ComposerStaticInit499ff201ed8537cc67e26201ae6954a0
         'App\\Http\\Controllers\\Auth\\PasswordResetLinkController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/PasswordResetLinkController.php',
         'App\\Http\\Controllers\\Auth\\RegisteredUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisteredUserController.php',
         'App\\Http\\Controllers\\Auth\\VerifyEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerifyEmailController.php',
+        'App\\Http\\Controllers\\BasketController' => __DIR__ . '/../..' . '/app/Http/Controllers/BasketController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\PasswordChangeController' => __DIR__ . '/../..' . '/app/Http/Controllers/PasswordChangeController.php',
+        'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
         'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
+        'App\\Models\\AgeGroup' => __DIR__ . '/../..' . '/app/Models/AgeGroup.php',
+        'App\\Models\\CartItem' => __DIR__ . '/../..' . '/app/Models/CartItem.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\View\\Components\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/AppLayout.php',
@@ -665,6 +669,7 @@ class ComposerStaticInit499ff201ed8537cc67e26201ae6954a0
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\ProductSeeder' => __DIR__ . '/../..' . '/database/seeders/ProductSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
@@ -5535,9 +5540,9 @@ class ComposerStaticInit499ff201ed8537cc67e26201ae6954a0
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit499ff201ed8537cc67e26201ae6954a0::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit499ff201ed8537cc67e26201ae6954a0::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit499ff201ed8537cc67e26201ae6954a0::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit457eb9c4ff3ea789ad407985e9271c25::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit457eb9c4ff3ea789ad407985e9271c25::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit457eb9c4ff3ea789ad407985e9271c25::$classMap;
 
         }, null, ClassLoader::class);
     }
