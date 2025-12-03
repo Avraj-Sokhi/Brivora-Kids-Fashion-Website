@@ -74,20 +74,14 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the cart associated with the user.
+     * Get the cart items for the user.
      */
-    public function cart()
+    public function cartItems()
     {
-        return $this->hasOne(Cart::class);
+        return $this->hasMany(CartItem::class);
     }
 
-    /**
-     * Get the wishlists for the user.
-     */
-    public function wishlists()
-    {
-        return $this->hasMany(Wishlist::class);
-    }
+
 
     /**
      * Check if the user is an admin.
