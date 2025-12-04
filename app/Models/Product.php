@@ -22,10 +22,13 @@ class Product extends Model
         'slug',
         'description',
         'price',
-        'stock',
-        'is_active',
+        'stock_quantity',
+        'low_stock_threshold',
+        'status',
         'category_id',
         'age_group_id',
+        'image_url',
+        'size_chart_url',
     ];
 
     /**
@@ -35,8 +38,8 @@ class Product extends Model
      */
     protected $casts = [
         'price' => 'decimal:2',
-        'stock' => 'integer',
-        'is_active' => 'boolean',
+        'stock_quantity' => 'integer',
+        'low_stock_threshold' => 'integer',
     ];
 
     /**
@@ -108,7 +111,7 @@ class Product extends Model
      */
     public function scopeActive($query)
     {
-        return $query->where('is_active', true);
+        return $query->where('status', 'active');
     }
 
     /**
@@ -119,6 +122,6 @@ class Product extends Model
      */
     public function scopeLowStock($query, int $threshold = 5)
     {
-        return $query->where('stock', '<=', $threshold);
+        return $query->where('stock_quantity', '<=', $threshold);
     }
 }
