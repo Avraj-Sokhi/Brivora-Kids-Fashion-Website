@@ -7,17 +7,15 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('age_groups', function (Blueprint $table) {
+        Schema::create('genders', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->integer('min_age');
-            $table->integer('max_age');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('age_groups');
+        Schema::dropIfExists('genders');
     }
 };

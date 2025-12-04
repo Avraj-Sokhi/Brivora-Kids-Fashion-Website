@@ -42,11 +42,11 @@
           </option>
         @endforeach
       </select>
-      <select name="age_group">
-        <option value="">All genders</option>
-        @foreach($ageGroups as $ageGroup)
-          <option value="{{ $ageGroup->id }}" {{ request('age_group') == $ageGroup->id ? 'selected' : '' }}>
-            {{ $ageGroup->name }}
+      <select name="gender">
+        <option value="">All Genders</option>
+        @foreach($genders as $gender)
+          <option value="{{ $gender->id }}" {{ request('gender') == $gender->id ? 'selected' : '' }}>
+            {{ $gender->name }}
           </option>
         @endforeach
       </select>

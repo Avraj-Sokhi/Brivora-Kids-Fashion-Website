@@ -26,7 +26,7 @@ class Product extends Model
         'low_stock_threshold',
         'status',
         'category_id',
-        'age_group_id',
+        'gender_id',
         'image_url',
         'size_chart_url',
     ];
@@ -51,11 +51,11 @@ class Product extends Model
     }
 
     /**
-     * Age group relationship.
+     * Gender relationship.
      */
-    public function ageGroup(): BelongsTo
+    public function gender(): BelongsTo
     {
-        return $this->belongsTo(AgeGroup::class);
+        return $this->belongsTo(Gender::class);
     }
 
     /**
