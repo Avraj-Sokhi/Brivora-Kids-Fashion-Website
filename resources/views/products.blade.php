@@ -30,21 +30,29 @@
     }
   </style>
 
-  {{-- Filters --}}
-  <section class="filters">
-    <form method="GET" action="{{ route('products.index') }}">
-      <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." />
-      <select name="category">
-        <option value="">All Categories</option>
-        <option value="accessories" {{ request('category') === 'accessories' ? 'selected' : '' }}>Accessories</option>
-        <option value="outerwear" {{ request('category') === 'outerwear' ? 'selected' : '' }}>Outerwear</option>
-        <option value="trousers" {{ request('category') === 'trousers' ? 'selected' : '' }}>Trousers</option>
-        <option value="shoes" {{ request('category') === 'shoes' ? 'selected' : '' }}>Shoes</option>
-        <option value="tops" {{ request('category') === 'tops' ? 'selected' : '' }}>Tops</option>
-      </select>
-      <button class="btn" type="submit">Filter</button>
-    </form>
-  </section>
+{{-- Filters --}}
+<section class="filters">
+  <form method="GET" action="{{ route('products.index') }}">
+    <input 
+      type="text" 
+      id="search" 
+      name="search" 
+      value="{{ request('search') }}" 
+      placeholder="Search products..." 
+    />
+
+    <select id="category" name="category">
+      <option value="">All Categories</option>
+      <option value="accessories" {{ request('category') === 'accessories' ? 'selected' : '' }}>Accessories</option>
+      <option value="outerwear" {{ request('category') === 'outerwear' ? 'selected' : '' }}>Outerwear</option>
+      <option value="trousers" {{ request('category') === 'trousers' ? 'selected' : '' }}>Trousers</option>
+      <option value="shoes" {{ request('category') === 'shoes' ? 'selected' : '' }}>Shoes</option>
+      <option value="tops" {{ request('category') === 'tops' ? 'selected' : '' }}>Tops</option>
+    </select>
+
+    <button class="btn" type="submit">Filter</button>
+  </form>
+</section>
 
   {{-- Product Grid --}}
   <section class="products" id="product-list">
@@ -483,5 +491,47 @@
       </div>
     </div>
 
-  </section>
-@endsection
+  </section> 
+<!--END OF PRODUCT GRID-->
+
+ {{-- Search Filter Fix --}}
+<script>
+  // Grab elements
+  const searchInput = document.getElementById('search');
+  const categorySelect = document.getElementById('category');
+  const cards = document.querySelectorAll('.card');
+
+  // Filter function
+  function filterProducts() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const category = categorySelect.value;
+
+    cards.forEach(card => {
+      const name = card.querySelector('h3').textContent.toLowerCase();
+      const desc = card.querySelector('p').textContent.toLowerCase();
+      const cardCategory = card.getAttribute('data-category');
+
+      const matchesSearch =
+     name.startsWith(searchTerm) ||
+     name.includes(searchTerm) ||
+     desc.includes(searchTerm);
+
+      const matchesCategory = !category || cardCategory === category;
+
+      if (matchesSearch && matchesCategory) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Run filter when typing or changing dropdown
+  searchInput.addEventListener('input', filterProducts);
+  categorySelect.addEventListener('change', filterProducts);
+</script>
+
+</body>
+</html>
+
+
