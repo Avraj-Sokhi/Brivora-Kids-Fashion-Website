@@ -22,6 +22,7 @@
   </a>
 
   @auth
+    <a href="{{ route('orders.index') }}">📦 My Orders</a>
     <a href="{{ route('profile.edit') }}">Profile</a>
     <form method="POST" action="{{ route('logout') }}" style="display: inline;">
       @csrf
