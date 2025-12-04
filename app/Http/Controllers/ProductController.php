@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\AgeGroup;
+use App\Models\Gender;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -12,17 +12,17 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        // Cache categories and age groups for 24 hours
+        // Cache categories and genders for 24 hours
         $categories = Cache::remember('categories', 86400, function () {
             return Category::all();
         });
 
-        $ageGroups = Cache::remember('age_groups', 86400, function () {
-            return AgeGroup::all();
+        $genders = Cache::remember('genders', 86400, function () {
+            return Gender::all();
         });
 
         // Build query with eager loading to prevent N+1
-        $query = Product::with(['category', 'ageGroup', 'images'])
+        $query = Product::with(['category', 'gender', 'images'])
             ->where('status', 'active');
 
         // Apply category filter if provided
@@ -32,9 +32,9 @@ class ProductController extends Controller
             });
         }
 
-        // Apply age group filter if provided
-        if ($request->has('age_group') && $request->filled('age_group')) {
-            $query->where('age_group_id', $request->age_group);
+        // Apply gender filter if provided
+        if ($request->has('gender') && $request->filled('gender')) {
+            $query->where('gender_id', $request->gender);
         }
 
         // Apply search filter if provided
@@ -66,7 +66,7 @@ class ProductController extends Controller
         // Paginate results (12 per page)
         $products = $query->paginate(12);
 
-        return view('products', compact('products', 'categories', 'ageGroups'));
+        return view('products', compact('products', 'categories', 'genders'));
     }
 
     /**
@@ -76,7 +76,7 @@ class ProductController extends Controller
     {
         // Cache individual product for 24 hours
         $product = Cache::remember("product.{$product->id}", 86400, function () use ($product) {
-            return $product->load(['category', 'ageGroup', 'images', 'reviews.user', 'sizes']);
+            return $product->load(['category', 'gender', 'images', 'reviews.user', 'sizes']);
         });
 
         return view('product.show', compact('product'));

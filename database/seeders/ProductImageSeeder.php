@@ -46,7 +46,7 @@ class ProductImageSeeder extends Seeder
             'Pink Hat and Mittens' => 'images/girls accesories 3.png',
 
             // Girls Outerwear
-            'Pink Fluffy Cardigan' => 'images/girls outerwear 1.png',
+            'Pink Cardigan Fleece' => 'images/girls outerwear 1.png',
             'Fluffy Fleece' => 'images/girls outerwear 2.png',
             'Denim Jacket' => 'images/girls outerwear 3.png',
 
@@ -61,7 +61,7 @@ class ProductImageSeeder extends Seeder
             'Pink Longsleeve Shirt' => 'images/girls top 3.png',
 
             // Girls Bottoms
-            'Pink Skirt' => 'images/girls bottom 1.png',
+            'Pink Heart Skirt' => 'images/girls bottom 1.png',
             'Denim Unicorn Skirt' => 'images/girls bottom 2.png',
             'Pink Star Jeans' => 'images/girls bottom 3.png',
         ];

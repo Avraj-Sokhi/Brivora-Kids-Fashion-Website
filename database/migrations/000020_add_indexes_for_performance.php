@@ -55,9 +55,9 @@ return new class extends Migration {
             if (!$this->indexExists('products', 'products_category_id_index')) {
                 $table->index('category_id');
             }
-            // Only add age_group_id index if column exists
-            if (Schema::hasColumn('products', 'age_group_id') && !$this->indexExists('products', 'products_age_group_id_index')) {
-                $table->index('age_group_id');
+            // Only add gender_id index if column exists
+            if (Schema::hasColumn('products', 'gender_id') && !$this->indexExists('products', 'products_gender_id_index')) {
+                $table->index('gender_id');
             }
         });
 
@@ -103,7 +103,7 @@ return new class extends Migration {
 
         Schema::table('products', function (Blueprint $table) {
             $table->dropIndex(['category_id']);
-            $table->dropIndex(['age_group_id']);
+            $table->dropIndex(['gender_id']);
             $table->dropIndex(['is_active']);
         });
 
