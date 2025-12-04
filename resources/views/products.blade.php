@@ -36,11 +36,25 @@
       <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." />
       <select name="category">
         <option value="">All Categories</option>
-        <option value="accessories" {{ request('category') === 'accessories' ? 'selected' : '' }}>Accessories</option>
-        <option value="outerwear" {{ request('category') === 'outerwear' ? 'selected' : '' }}>Outerwear</option>
-        <option value="trousers" {{ request('category') === 'trousers' ? 'selected' : '' }}>Trousers</option>
-        <option value="shoes" {{ request('category') === 'shoes' ? 'selected' : '' }}>Shoes</option>
-        <option value="tops" {{ request('category') === 'tops' ? 'selected' : '' }}>Tops</option>
+        @foreach($categories as $category)
+          <option value="{{ $category->slug }}" {{ request('category') === $category->slug ? 'selected' : '' }}>
+            {{ $category->name }}
+          </option>
+        @endforeach
+      </select>
+      <select name="age_group">
+        <option value="">All Age Groups</option>
+        @foreach($ageGroups as $ageGroup)
+          <option value="{{ $ageGroup->id }}" {{ request('age_group') == $ageGroup->id ? 'selected' : '' }}>
+            {{ $ageGroup->name }}
+          </option>
+        @endforeach
+      </select>
+      <select name="sort">
+        <option value="newest" {{ request('sort') === 'newest' ? 'selected' : '' }}>Newest First</option>
+        <option value="price_low" {{ request('sort') === 'price_low' ? 'selected' : '' }}>Price: Low to High</option>
+        <option value="price_high" {{ request('sort') === 'price_high' ? 'selected' : '' }}>Price: High to Low</option>
+        <option value="name" {{ request('sort') === 'name' ? 'selected' : '' }}>Name: A-Z</option>
       </select>
       <button class="btn" type="submit">Filter</button>
     </form>
@@ -48,440 +62,121 @@
 
   {{-- Product Grid --}}
   <section class="products" id="product-list">
+    @forelse($products as $product)
+      <div class="card" data-category="{{ $product->category->slug ?? '' }}" data-price="{{ $product->price }}">
+        {{-- Product Image --}}
+        @if($product->images->isNotEmpty())
+          <img src="{{ asset($product->images->first()->image_url) }}" alt="{{ $product->name }}" loading="lazy" />
+        @elseif($product->image_url)
+          <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}" loading="lazy" />
+        @else
+          <img src="{{ asset('images/placeholder.png') }}" alt="{{ $product->name }}" loading="lazy" />
+        @endif
 
-    <!-- Accessories Boys -->
-    <div class="card" data-category="accessories" data-price="10">
-      <img src="{{ asset('images for website/Accessory 1.png') }}" alt="Minecraft Beanie" loading="lazy" />
-      <div class="card-body">
-        <h3>Minecraft Beanie</h3>
-        <p>£10.00</p>
-        <p>Knitted hat with Creeper patch.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 1]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
+        <div class="card-body">
+          <h3>{{ $product->name }}</h3>
+          <p>{{ $product->formatted_price }}</p>
+          <p>{{ Str::limit($product->description, 60) }}</p>
+
+          {{-- Stock Status --}}
+          @if($product->stock_quantity > 0)
+            @if($product->stock_quantity <= $product->low_stock_threshold)
+              <p class="stock low-stock">Low Stock ({{ $product->stock_quantity }} left)</p>
+            @else
+              <p class="stock">In Stock</p>
+            @endif
+          @else
+            <p class="stock out-of-stock">Out of Stock</p>
+          @endif
+
+          {{-- Add to Basket Button --}}
+          @if($product->stock_quantity > 0)
+            <form method="POST" action="{{ route('basket.add', ['productId' => $product->id]) }}">
+              @csrf
+              <button class="btn" type="submit">Add to Basket</button>
+            </form>
+          @else
+            <button class="btn" disabled style="opacity: 0.5; cursor: not-allowed;">Out of Stock</button>
+          @endif
+        </div>
       </div>
-    </div>
-
-    <div class="card" data-category="accessories" data-price="8">
-      <img src="{{ asset('images for website/Accessory 2.png') }}" alt="Fleece Mittens" loading="lazy" />
-      <div class="card-body">
-        <h3>Fleece Mittens</h3>
-        <p>£8.00</p>
-        <p>Soft navy mittens for winter.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 2]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
+    @empty
+      <div class="no-products">
+        <h2>No products found</h2>
+        <p>Try adjusting your filters or search terms.</p>
+        <a href="{{ route('products.index') }}" class="btn">Clear Filters</a>
       </div>
-    </div>
-
-    <div class="card" data-category="accessories" data-price="18">
-      <img src="{{ asset('images for website/Accessory 3.png') }}" alt="Kids Backpack" loading="lazy" />
-      <div class="card-body">
-        <h3>Kids Backpack</h3>
-        <p>£18.00</p>
-        <p>Sporty backpack with patches.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 3]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Outerwear Boys -->
-    <div class="card" data-category="outerwear" data-price="35">
-      <img src="{{ asset('images for website/Outerwear 1.png') }}" alt="Rabbit Jacket" loading="lazy" />
-      <div class="card-body">
-        <h3>Rabbit Jacket</h3>
-        <p>£35.00</p>
-        <p>Quilted navy jacket with rabbit patch.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 4]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="outerwear" data-price="30">
-      <img src="{{ asset('images for website/Outerwear 2.png') }}" alt="Puffer jacket" loading="lazy" />
-      <div class="card-body">
-        <h3>Puffer Jacket</h3>
-        <p>£30.00</p>
-        <p>Blue puffer with striped cuffs.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 5]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="outerwear" data-price="28">
-      <img src="{{ asset('images for website/Outerwear 3.png') }}" alt="Tractor Fleece" loading="lazy" />
-      <div class="card-body">
-        <h3>Tractor Fleece</h3>
-        <p>£28.00</p>
-        <p>Fleece coat with tractor print.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 6]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <!--Shoes Boys-->
-    <div class="card" data-category="shoes" data-price="22">
-      <img src="{{ asset('images for website/Shoe 1.png') }}" alt="Black high top" loading="lazy" />
-      <div class="card-body">
-        <h3>Black high top</h3>
-        <p>£22.00</p>
-        <p>Warm sneaker with fuzzy lining .</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 7]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="shoes" data-price="24">
-      <img src="{{ asset('images for website/Shoe 2.png') }}" alt="Marvel Sneaker" loading="lazy" />
-      <div class="card-body">
-        <h3>Marvel Sneaker</h3>
-        <p>£24.00</p>
-        <p>Superhero-themed high-top sneaker.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 8]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="shoes" data-price="26">
-      <img src="{{ asset('images for website/Shoe 3.png') }}" alt="Jurassic Sneaker" loading="lazy" />
-      <div class="card-body">
-        <h3>Jurassic Sneaker</h3>
-        <p>£26.00</p>
-        <p>Dinosaur-themed canvas sneaker.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 9]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Tops Boys -->
-    <div class="card" data-category="tops" data-price="16">
-      <img src="{{ asset('images for website/Top 1.png') }}" alt="Navy Polo Shirt" loading="lazy" />
-      <div class="card-body">
-        <h3>Navy Polo Shirt</h3>
-        <p>£16.00</p>
-        <p>Classic polo with white collar.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 10]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="tops" data-price="14">
-      <img src="{{ asset('images for website/Top 2.png') }}" alt="Racecar Shirt" loading="lazy" />
-      <div class="card-body">
-        <h3>Racecar Shirt</h3>
-        <p>£14.00</p>
-        <p>Striped shirt with embroidered racecars.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 11]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="tops" data-price="15">
-      <img src="{{ asset('images for website/Top 3.png') }}" alt="Dinosaur Shirt" loading="lazy" />
-      <div class="card-body">
-        <h3>Dinosaur Shirt</h3>
-        <p>£15.00</p>
-        <p>Fun dino-themed long sleeve shirt.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 12]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Trousers Boys -->
-    <div class="card" data-category="trousers" data-price="18">
-      <img src="{{ asset('images for website/Trousers 1.png') }}" alt="Planet Joggers" loading="lazy" />
-      <div class="card-body">
-        <h3>Planet Joggers</h3>
-        <p>£18.00</p>
-        <p>Space-themed joggers with planet embroidery.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 13]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="trousers" data-price="17">
-      <img src="{{ asset('images for website/Trousers 2.png') }}" alt="Dino Joggers" loading="lazy" />
-      <div class="card-body">
-        <h3>Dino Joggers</h3>
-        <p>£17.00</p>
-        <p>Elastic joggers with pastel dinosaur print.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 14]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-
-    <div class="card" data-category="trousers" data-price="20">
-      <img src="{{ asset('images for website/Trousers 3.png') }}" alt="Pokémon Joggers" loading="lazy" />
-      <div class="card-body">
-        <h3>Pokémon Joggers</h3>
-        <p>£20.00</p>
-        <p>Black joggers with Pikachu and other pokemons.</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 15]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Accessories Girls -->
-    <div class="card" data-category="accessories" data-price="15">
-      <img src="{{ asset('images for website/girls accesories 1.png') }}" alt="Pink Backpack" loading="lazy" />
-      <div class="card-body">
-        <h3>Pink Backpack</h3>
-        <p>£15.00</p>
-        <p>Fun Pink backpack with eyes and rainbows</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 16]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="accessories" data-price="10">
-      <img src="{{ asset('images for website/girls accesories 2.png') }}" alt="Pink Cap" loading="lazy" />
-      <div class="card-body">
-        <h3>Pink Barbie Cap</h3>
-        <p>£10.00</p>
-        <p>Pink cap with barbie signature</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 17]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="accessories" data-price="15">
-      <img src="{{ asset('images for website/girls accesories 3.png') }}" alt="Pink Hat and Mittens" loading="lazy" />
-      <div class="card-body">
-        <h3>Pink Hat and Mittens</h3>
-        <p>£15.00</p>
-        <p>Pink fluffy hat and mittens set</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 18]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Outerwear Girls -->
-
-    <div class="card" data-category="outerwear" data-price="26">
-      <img src="{{ asset('images for website/girls outerwear 1.png') }}" alt="Fluffy flower fleece" loading="lazy" />
-      <div class="card-body">
-        <h3>Fluffy fleece</h3>
-        <p>£26.00</p>
-        <p>Fluffy white fleece with flower patterns</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 19]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-
-    <div class="card" data-category="outerwear" data-price="24">
-      <img src="{{ asset('images for website/girls outerwear 2.png') }}" alt="Fluffy fleece" loading="lazy" />
-      <div class="card-body">
-        <h3>Fluffy fleece</h3>
-        <p>£26.00</p>
-        <p>Fluffy pink cardigan fleece with crosshatch patterns</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 20]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-
-    <div class="card" data-category="outerwear" data-price="20">
-      <img src="{{ asset('images for website/girls outerwear 3.png') }}" alt="Denim jacket" loading="lazy" />
-      <div class="card-body">
-        <h3>Denim jacket</h3>
-        <p>£20.00</p>
-        <p>Denim jacket with heart patterns</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 21]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Girls Shoes-->
-    <div class="card" data-category="shoes" data-price="20">
-      <img src="{{ asset('images for website/girls shoes 1.png') }}" alt="Pink Trainers" loading="lazy" />
-      <div class="card-body">
-        <h3>Pink Trainers</h3>
-        <p>£20.00</p>
-        <p>Pink trainers with strap</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 22]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="shoes" data-price="23">
-      <img src="{{ asset('images for website/girls shoes 2.png') }}" alt="Heels" loading="lazy" />
-      <div class="card-body">
-        <h3>Pink Heels</h3>
-        <p>£23.00</p>
-        <p>Pink heels with bow</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 23]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="shoes" data-price="12">
-      <img src="{{ asset('images for website/girls shoes 3.png') }}" alt="Pumps" loading="lazy" />
-      <div class="card-body">
-        <h3>Pink Pumps</h3>
-        <p>£12.00</p>
-        <p>Pink heels with heart pattern</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 24]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-    <!-- Girls Tops-->
-    <div class="card" data-category="tops" data-price="18">
-      <img src="{{ asset('images for website/girls top 1.png') }}" alt="Jumper" loading="lazy" />
-      <div class="card-body">
-        <h3>Rainbow jumper</h3>
-        <p>£18.00</p>
-        <p>Rainbow striped jumper with unicorn</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 25]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="tops" data-price="15">
-      <img src="{{ asset('images for website/girls top 2.png') }}" alt="T-shirt" loading="lazy" />
-      <div class="card-body">
-        <h3>T-shirt</h3>
-        <p>£15.00</p>
-        <p>Yellow T-shirt with flowers</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 26]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="tops" data-price="20">
-      <img src="{{ asset('images for website/girls top 3.png') }}" alt="Longsleeve shirt" loading="lazy" />
-      <div class="card-body">
-        <h3>Longsleeve shirt</h3>
-        <p>£20.00</p>
-        <p>Pink longsleeve shirt with buttons</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 27]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Girls Trousers-->
-
-    <div class="card" data-category="trousers" data-price="15">
-      <img src="{{ asset('images for website/girls bottom 1.png') }}" alt="Skirt" loading="lazy" />
-      <div class="card-body">
-        <h3>Skirt</h3>
-        <p>£15.00</p>
-        <p>Pink skirt with heart patterns</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 28]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="trousers" data-price="15">
-      <img src="{{ asset('images for website/girls bottom 2.png') }}" alt="Denim Skirt" loading="lazy" />
-      <div class="card-body">
-        <h3>Denim Skirt</h3>
-        <p>£15.00</p>
-        <p>Denim skirt with unicorns</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 29]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="card" data-category="trousers" data-price="15">
-      <img src="{{ asset('images for website/girls bottom 3.png') }}" alt="Denim Jeans" loading="lazy" />
-      <div class="card-body">
-        <h3>Denim Jeans</h3>
-        <p>£20.00</p>
-        <p>Denim pink jeans with star patterns</p>
-        <p class="stock">In Stock</p>
-        <form method="POST" action="{{ route('basket.add', ['productId' => 30]) }}">
-          @csrf
-          <button class="btn" type="submit">Add to Basket</button>
-        </form>
-      </div>
-    </div>
-
+    @endforelse
   </section>
+
+  {{-- Bootstrap Pagination --}}
+  @if($products->hasPages())
+    <div class="d-flex justify-content-center my-4">
+      {{ $products->links('pagination::bootstrap-5') }}
+    </div>
+  @endif
+
+
+  {{-- Google Fonts --}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    .low-stock {
+      color: #ff9800 !important;
+      font-weight: bold;
+    }
+
+    .out-of-stock {
+      color: #f44336 !important;
+      font-weight: bold;
+    }
+
+    .no-products {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem;
+      background: #f5f5f5;
+      border-radius: 15px;
+      margin: 2rem;
+    }
+
+    .no-products h2 {
+      color: #ff6f61;
+      font-family: 'Fredoka One', cursive;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .no-products p {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Custom Bootstrap Pagination Styling */
+    .pagination .page-link {
+      color: #ff6f61;
+      border-color: #ff6f61;
+      font-family: 'Comic Neue', cursive;
+      transition: all 0.3s ease;
+    }
+
+    .pagination .page-link:hover {
+      background-color: #ff6f61;
+      color: white;
+      border-color: #ff6f61;
+    }
+
+    .pagination .page-item.active .page-link {
+      background-color: #ff6f61;
+      border-color: #ff6f61;
+      color: white;
+    }
+
+    .pagination .page-item.disabled .page-link {
+      color: #ccc;
+      border-color: #ddd;
+    }
+  </style>
 @endsection

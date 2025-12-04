@@ -16,54 +16,54 @@ class ProductImageSeeder extends Seeder
         // Map product names to their image paths
         $productImages = [
             // Boys Accessories
-            'Minecraft Beanie' => 'images for website/Accessory 1.png',
-            'Fleece Mittens' => 'images for website/Accessory 2.png',
-            'Kids Backpack' => 'images for website/Accessory 3.png',
+            'Minecraft Beanie' => 'images/Accessory 1.png',
+            'Fleece Mittens' => 'images/Accessory 2.png',
+            'Kids Backpack' => 'images/Accessory 3.png',
 
             // Boys Outerwear
-            'Rabbit Jacket' => 'images for website/Outerwear 1.png',
-            'Puffer Jacket' => 'images for website/Outerwear 2.png',
-            'Tractor Fleece' => 'images for website/Outerwear 3.png',
+            'Rabbit Jacket' => 'images/Outerwear 1.png',
+            'Puffer Jacket' => 'images/Outerwear 2.png',
+            'Tractor Fleece' => 'images/Outerwear 3.png',
 
             // Boys Shoes
-            'Black High Top' => 'images for website/Shoe 1.png',
-            'Marvel Sneaker' => 'images for website/Shoe 2.png',
-            'Jurassic Sneaker' => 'images for website/Shoe 3.png',
+            'Black High Top' => 'images/Shoe 1.png',
+            'Marvel Sneaker' => 'images/Shoe 2.png',
+            'Jurassic Sneaker' => 'images/Shoe 3.png',
 
             // Boys Tops
-            'Navy Polo Shirt' => 'images for website/Top 1.png',
-            'Racecar Shirt' => 'images for website/Top 2.png',
-            'Dinosaur Shirt' => 'images for website/Top 3.png',
+            'Navy Polo Shirt' => 'images/Top 1.png',
+            'Racecar Shirt' => 'images/Top 2.png',
+            'Dinosaur Shirt' => 'images/Top 3.png',
 
             // Boys Trousers
-            'Planet Joggers' => 'images for website/Trousers 1.png',
-            'Dino Joggers' => 'images for website/Trousers 2.png',
-            'Pokémon Joggers' => 'images for website/Trousers 3.png',
+            'Planet Joggers' => 'images/Trousers 1.png',
+            'Dino Joggers' => 'images/Trousers 2.png',
+            'Pokémon Joggers' => 'images/Trousers 3.png',
 
             // Girls Accessories
-            'Pink Backpack' => 'images for website/girls accesories 1.png',
-            'Pink Cap' => 'images for website/girls accesories 2.png',
-            'Pink Hat and Mittens' => 'images for website/girls accesories 3.png',
+            'Pink Backpack' => 'images/girls accesories 1.png',
+            'Pink Barbie Cap' => 'images/girls accesories 2.png',
+            'Pink Hat and Mittens' => 'images/girls accesories 3.png',
 
             // Girls Outerwear
-            'Fluffy Flower Fleece' => 'images for website/girls outerwear 1.png',
-            'Fluffy Fleece' => 'images for website/girls outerwear 2.png',
-            'Denim Jacket' => 'images for website/girls outerwear 3.png',
+            'Pink Fluffy Cardigan' => 'images/girls outerwear 1.png',
+            'Fluffy Fleece' => 'images/girls outerwear 2.png',
+            'Denim Jacket' => 'images/girls outerwear 3.png',
 
             // Girls Shoes
-            'Pink Trainers' => 'images for website/girls shoes 1.png',
-            'Heels' => 'images for website/girls shoes 2.png',
-            'Pumps' => 'images for website/girls shoes 3.png',
+            'Pink Trainers' => 'images/girls shoes 1.png',
+            'Pink Heels' => 'images/girls shoes 2.png',
+            'Pink Pumps' => 'images/girls shoes 3.png',
 
             // Girls Tops
-            'Jumper' => 'images for website/girls top 1.png',
-            'T-shirt' => 'images for website/girls top 2.png',
-            'Longsleeve Shirt' => 'images for website/girls top 3.png',
+            'Rainbow Jumper' => 'images/girls top 1.png',
+            'Yellow T-shirt' => 'images/girls top 2.png',
+            'Pink Longsleeve Shirt' => 'images/girls top 3.png',
 
             // Girls Bottoms
-            'Skirt' => 'images for website/girls bottom 1.png',
-            'Denim Skirt' => 'images for website/girls bottom 2.png',
-            'Denim Jeans' => 'images for website/girls bottom 3.png',
+            'Pink Skirt' => 'images/girls bottom 1.png',
+            'Denim Unicorn Skirt' => 'images/girls bottom 2.png',
+            'Pink Star Jeans' => 'images/girls bottom 3.png',
         ];
 
         foreach ($productImages as $productName => $imagePath) {

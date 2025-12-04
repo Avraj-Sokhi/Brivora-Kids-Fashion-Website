@@ -48,20 +48,29 @@
                                 </td>
                                 <td class="p-4 text-center">
                                     <form method="POST" action="{{ route('basket.update', $item->product_id) }}"
-                                        class="inline-flex items-center gap-2">
+                                        class="inline-flex items-center gap-2 quantity-form">
                                         @csrf
                                         @method('PATCH')
                                         <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" max="99"
-                                            class="w-16 px-2 py-1 border-2 border-red-400 rounded-lg text-center font-comic-neue">
-                                        <button type="submit" class="btn px-3 py-1 text-sm">Update</button>
+                                            class="quantity-input w-16 px-2 py-1 border-2 border-red-400 rounded-lg text-center font-comic-neue"
+                                            data-product-id="{{ $item->product_id }}">
+                                        <span class="loading-spinner hidden">
+                                            <svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                                    stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor"
+                                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                                </path>
+                                            </svg>
+                                        </span>
                                     </form>
                                 </td>
                                 <td class="p-4 text-center font-bold text-green-600 text-lg">
                                     £{{ number_format(Auth::check() ? $item->total : $item->total, 2) }}
                                 </td>
                                 <td class="p-4 text-center">
-                                    <form method="POST" action="{{ route('basket.remove', $item->product_id) }}"
-                                        class="inline">
+                                    <form method="POST" action="{{ route('basket.remove', $item->product_id) }}" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn bg-red-600 px-4 py-2"
@@ -87,8 +96,7 @@
                         <form method="POST" action="{{ route('basket.clear') }}" class="inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn bg-red-600"
-                                onclick="return confirm('Clear entire basket?')">
+                            <button type="submit" class="btn bg-red-600" onclick="return confirm('Clear entire basket?')">
                                 Clear Basket
                             </button>
                         </form>
@@ -97,7 +105,8 @@
                             Continue Shopping
                         </a>
 
-                        <a href="{{ route('checkout.index') }}" class="btn bg-green-600 no-underline inline-block text-lg px-6 py-3">
+                        <a href="{{ route('checkout.index') }}"
+                            class="btn bg-green-600 no-underline inline-block text-lg px-6 py-3">
                             Proceed to Checkout
                         </a>
                     </div>
@@ -122,5 +131,57 @@
                 font-size: 0.85rem !important;
             }
         }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
     </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quantityInputs = document.querySelectorAll('.quantity-input');
+            const updateTimers = {};
+
+            quantityInputs.forEach(input => {
+                const productId = input.dataset.productId;
+                const form = input.closest('.quantity-form');
+                const spinner = form.querySelector('.loading-spinner');
+
+                input.addEventListener('change', function() {
+                    // Clear any existing timer for this product
+                    if (updateTimers[productId]) {
+                        clearTimeout(updateTimers[productId]);
+                    }
+
+                    // Show loading spinner
+                    if (spinner) {
+                        spinner.classList.remove('hidden');
+                    }
+
+                    // Set a timer to submit the form after 800ms of no changes
+                    updateTimers[productId] = setTimeout(() => {
+                        form.submit();
+                    }, 800);
+                });
+
+                // Also handle immediate submission on Enter key
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (updateTimers[productId]) {
+                            clearTimeout(updateTimers[productId]);
+                        }
+                        if (spinner) {
+                            spinner.classList.remove('hidden');
+                        }
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

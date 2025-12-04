@@ -23,7 +23,7 @@ class ProductController extends Controller
 
         // Build query with eager loading to prevent N+1
         $query = Product::with(['category', 'ageGroup', 'images'])
-            ->where('is_active', true);
+            ->where('status', 'active');
 
         // Apply category filter if provided
         if ($request->has('category') && $request->filled('category')) {
@@ -42,7 +42,7 @@ class ProductController extends Controller
             $searchTerm = $request->search;
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('name', 'like', "%{$searchTerm}%")
-                  ->orWhere('description', 'like', "%{$searchTerm}%");
+                    ->orWhere('description', 'like', "%{$searchTerm}%");
             });
         }
 
