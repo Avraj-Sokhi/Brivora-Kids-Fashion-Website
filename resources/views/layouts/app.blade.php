@@ -8,6 +8,9 @@
 
     <title>{{ $title ?? config('app.name', 'Brivora Kids Fashion') }}</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Fredoka+One&display=swap"
         rel="stylesheet">
