@@ -133,7 +133,7 @@ class CheckoutController extends Controller
             Session::forget('cart');
         }
 
-        // Redirect to success page with order number
-        return redirect()->route('products.index')->with('success', 'Order placed successfully! Your order number is: ' . $order->order_number);
+        // Redirect to orders page with success message
+        return redirect()->route('orders.index')->with('success', '🎉 Order placed successfully! Your order number is: ' . $order->order_number);
     }
 }
