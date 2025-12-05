@@ -151,17 +151,19 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-100" style="display: flex; flex-direction: column;">
         {{-- Laravel navigation removed - using custom nav component in pages instead --}}
 
         {{-- Page Content --}}
-        <main>
+        <main style="flex: 1;">
             @isset($slot)
                 {{ $slot }}
             @else
                 @yield('content')
             @endisset
         </main>
+
+        <x-footer />
     </div>
 </body>
 
