@@ -27,8 +27,10 @@
 
         nav {
             background: #4a90e2;
-            padding: 0.5rem;
-            text-align: center;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         nav a {
