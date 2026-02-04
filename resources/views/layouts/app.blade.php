@@ -8,11 +8,17 @@
 
     <title>{{ $title ?? config('app.name', 'Brivora Kids Fashion') }}</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Fredoka+One&display=swap"
         rel="stylesheet">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Vite / App assets -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -145,17 +151,19 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-100" style="display: flex; flex-direction: column;">
         {{-- Laravel navigation removed - using custom nav component in pages instead --}}
 
         {{-- Page Content --}}
-        <main>
+        <main style="flex: 1;">
             @isset($slot)
                 {{ $slot }}
             @else
                 @yield('content')
             @endisset
         </main>
+
+        <x-footer />
     </div>
 </body>
 
