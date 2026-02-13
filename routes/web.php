@@ -33,7 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
 
-});
+    Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'users'])
+    ->middleware('auth')
+    ->name('admin.users');
+    });
 
 require __DIR__ . '/auth.php';
 
