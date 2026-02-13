@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
-    /**
-     * Show the contact form.
-     */
+
+    //Show the contact form.
+
     public function index()
     {
         return view('contact');
     }
 
-    /**
-     * Handle the contact form submission.
-     */
+
+    //Handle the contact form submission.
+
     public function submit(Request $request)
     {
         // Validate the form data
@@ -40,6 +40,6 @@ class ContactController extends Controller
         ]);
 
         // Flash success message
-        return redirect()->route('contact.index')->with('success', 'Thank you for contacting us! We\'ll get back to you soon. 📧');
+        return redirect()->route('contact.index')->with('success', 'Thank you for contacting us! We\'ll get back to you soon.');
     }
 }
