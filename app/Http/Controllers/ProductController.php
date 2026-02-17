@@ -46,6 +46,14 @@ class ProductController extends Controller
             });
         }
 
+        if ($request->filled('min_price')) {
+    $query->where('price', '>=', $request->min_price);
+}
+
+if ($request->filled('max_price')) {
+    $query->where('price', '<=', $request->max_price);
+}
+
         // Apply sorting
         $sort = $request->get('sort', 'newest');
         switch ($sort) {
