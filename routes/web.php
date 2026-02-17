@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
     // Order routes
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+    Route::post('/orders/{order}/return', [OrderController::class, 'requestReturn'])
+    ->name('orders.return');
 
     Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'users'])
     ->middleware('auth')
