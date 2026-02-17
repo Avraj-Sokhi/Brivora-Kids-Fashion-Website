@@ -34,4 +34,15 @@ class OrderController extends Controller
 
         return view('orders.show', compact('order'));
     }
+
+    public function requestReturn(\App\Models\Order $order)
+    {
+        if ($order->user_is !== auth()->id()){
+            abort(403);
+        }
+        $order->return_requested = true;
+        $order->save();
+
+        return back()->with('success, 'Return request submitted.');
+    }
 }
