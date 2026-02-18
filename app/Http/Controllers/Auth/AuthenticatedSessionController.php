@@ -67,7 +67,7 @@ class AuthenticatedSessionController extends Controller
         }
         // redirect admin users
         if ($user->role === 'admin') {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.orders.index');
         }
         //redirect customers
         return redirect()->route('dashboard');
