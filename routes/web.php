@@ -24,11 +24,11 @@ Route::middleware('auth')->group(function () {
         ->name('password.change.update');
 });
 
-// 🔒 Admin-only routes
+// Admin only routes
 Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
+        return view('dashboard');
     })->name('admin.dashboard');
 
 });

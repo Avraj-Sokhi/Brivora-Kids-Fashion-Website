@@ -11,6 +11,7 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
+        // Allow access only if user is logged in AND role is 'admin'
         if (!Auth::check() || Auth::user()->role !== 'admin') {
             abort(403, 'Unauthorized access');
         }
