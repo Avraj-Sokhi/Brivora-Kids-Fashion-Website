@@ -50,6 +50,19 @@ class ProfileController extends Controller
 
         Auth::logout();
 
+        // Delete related records in the correct order to avoid foreign key constraint violations
+        // 1. Delete reviews first (they reference orders)
+        $user->reviews()->delete();
+
+        // 2. Delete orders (they reference addresses with RESTRICT constraint)
+        $user->orders()->delete();
+
+        // 3. The following will be automatically cascade deleted when user is deleted:
+        //    - addresses (onDelete cascade)
+        //    - cart items (onDelete cascade)
+        //    - wishlists (onDelete cascade)
+
+        // 4. Finally delete the user
         $user->delete();
 
         $request->session()->invalidate();
