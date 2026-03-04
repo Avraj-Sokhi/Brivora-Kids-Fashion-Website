@@ -10,10 +10,11 @@ return new class extends Migration {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->text('description');
             $table->decimal('price', 10, 2);
             $table->foreignId('category_id')->constrained('categories')->onDelete('restrict');
-            $table->foreignId('age_group_id')->constrained('age_groups')->onDelete('restrict');
+            $table->foreignId('gender_id')->constrained('genders')->onDelete('restrict');
             $table->integer('stock_quantity')->default(0);
             $table->integer('low_stock_threshold')->default(10);
             $table->string('image_url')->nullable();
@@ -22,7 +23,7 @@ return new class extends Migration {
             $table->timestamps();
 
             $table->index('category_id');
-            $table->index('age_group_id');
+            $table->index('gender_id');
             $table->index('status');
             $table->index('name');
         });
