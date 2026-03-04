@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->integer('max_uses')->nullable();
             $table->integer('uses_count')->default(0);
             $table->timestamp('valid_from');
-            $table->timestamp('valid_until');
+            $table->timestamp('valid_until')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
 
