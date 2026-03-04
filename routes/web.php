@@ -41,6 +41,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
 
+    // Admin Order Routes
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/orders', [App\Http\Controllers\Admin\AdminOrderController::class, 'index'])->name('orders.index');
+        Route::patch('/orders/{order}', [App\Http\Controllers\Admin\AdminOrderController::class, 'update'])->name('orders.update');
+    });
+
 });
 
 require __DIR__ . '/auth.php';
