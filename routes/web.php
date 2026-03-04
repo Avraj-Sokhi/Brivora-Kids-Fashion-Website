@@ -28,6 +28,14 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/password/change', [PasswordChangeController::class, 'update'])
         ->name('password.change.update');
+});
+
+// Admin only routes
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/admin/dashboard', function () {
+        return view('dashboard');
+    })->name('admin.dashboard');
 
     // Order routes
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
