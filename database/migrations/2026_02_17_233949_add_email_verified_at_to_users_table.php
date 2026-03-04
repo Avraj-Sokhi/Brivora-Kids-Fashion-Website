@@ -10,8 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->string('slug')->nullable()->after('name');
+        Schema::table('users', function (Blueprint $table) {
+            $table->timestamp('email_verified_at')->nullable()->after('email');
         });
     }
 
@@ -20,8 +20,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('slug');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('email_verified_at');
         });
     }
 };
