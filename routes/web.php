@@ -37,10 +37,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/orders/{order}/return', [OrderController::class, 'requestReturn'])
     ->name('orders.return');
 
-    Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'users'])
-    ->middleware('auth')
-    ->name('admin.users');
+    // Admin Order Routes
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/orders', [App\Http\Controllers\Admin\AdminOrderController::class, 'index'])->name('orders.index');
+        Route::patch('/orders/{order}', [App\Http\Controllers\Admin\AdminOrderController::class, 'update'])->name('orders.update');
     });
+
+});
 
 require __DIR__ . '/auth.php';
 
