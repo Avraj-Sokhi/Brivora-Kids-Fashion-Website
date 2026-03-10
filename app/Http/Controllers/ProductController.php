@@ -40,10 +40,38 @@ class ProductController extends Controller
         // Apply search filter if provided
         if ($request->has('search') && $request->filled('search')) {
             $searchTerm = $request->search;
-            $query->where(function ($q) use ($searchTerm) {
+            $words = array_filter(explode(' ', $searchTerm));
+
+            $query->where(function ($q) use ($searchTerm, $words) {
+                // Exact phrase match gets precedence
                 $q->where('name', 'like', "%{$searchTerm}%")
-                    ->orWhere('description', 'like', "%{$searchTerm}%");
+                    ->orWhere('description', 'like', "%{$searchTerm}%")
+                    ->orWhereHas('category', function ($subq) use ($searchTerm) {
+                        $subq->where('name', 'like', "%{$searchTerm}%");
+                    })
+                    ->orWhereHas('gender', function ($subq) use ($searchTerm) {
+                        $subq->where('name', 'like', "%{$searchTerm}%");
+                    });
+
+                // Match individual words if it's a multi-word search
+                if (count($words) > 1) {
+                    foreach ($words as $word) {
+                        if (strlen($word) > 2) { // Ignore very short words
+                            $q->orWhere('name', 'like', "%{$word}%")
+                                ->orWhere('description', 'like', "%{$word}%");
+                        }
+                    }
+                }
             });
+        }
+
+        // Apply price filters
+        if ($request->has('min_price') && $request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+
+        if ($request->has('max_price') && $request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
         }
 
         // Apply sorting

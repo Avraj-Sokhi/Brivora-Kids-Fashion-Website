@@ -33,8 +33,12 @@
   {{-- Filters --}}
   <section class="filters">
     <form method="GET" action="{{ route('products.index') }}">
-      <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." />
-      <select name="category">
+      <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.5rem;">
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;" />
+        <input type="number" name="min_price" value="{{ request('min_price') }}" placeholder="Min Price (£)" min="0" step="0.01" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; width: 120px;" />
+        <input type="number" name="max_price" value="{{ request('max_price') }}" placeholder="Max Price (£)" min="0" step="0.01" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; width: 120px;" />
+      </div>
+      <select name="category" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
         <option value="">All Categories</option>
         @foreach($categories as $category)
           <option value="{{ $category->slug }}" {{ request('category') === $category->slug ? 'selected' : '' }}>
@@ -42,7 +46,7 @@
           </option>
         @endforeach
       </select>
-      <select name="gender">
+      <select name="gender" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
         <option value="">All Genders</option>
         @foreach($genders as $gender)
           <option value="{{ $gender->id }}" {{ request('gender') == $gender->id ? 'selected' : '' }}>
@@ -50,13 +54,13 @@
           </option>
         @endforeach
       </select>
-      <select name="sort">
+      <select name="sort" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
         <option value="newest" {{ request('sort') === 'newest' ? 'selected' : '' }}>Newest First</option>
         <option value="price_low" {{ request('sort') === 'price_low' ? 'selected' : '' }}>Price: Low to High</option>
         <option value="price_high" {{ request('sort') === 'price_high' ? 'selected' : '' }}>Price: High to Low</option>
         <option value="name" {{ request('sort') === 'name' ? 'selected' : '' }}>Name: A-Z</option>
       </select>
-      <button class="btn" type="submit">Filter</button>
+      <button class="btn" type="submit" style="padding: 0.5rem 1rem;">Filter</button>
     </form>
   </section>
 
