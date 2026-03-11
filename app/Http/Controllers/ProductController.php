@@ -74,7 +74,7 @@ if ($request->filled('max_price')) {
         // Paginate results (12 per page)
         $products = $query->paginate(12);
 
-        return view('products', compact('products', 'categories', 'genders'));
+        return view('products.index', compact('products', 'categories', 'genders'));
     }
 
     /**
