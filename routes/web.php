@@ -12,11 +12,11 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ChatbotController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('pages.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/dashboard', function () {
-        return view('dashboard');
+        return view('pages.dashboard');
     })->name('admin.dashboard');
 
     // Order routes
@@ -67,7 +67,7 @@ Route::post('/chatbot/message', [ChatbotController::class, 'handle'])->name('cha
 
 // About Us page
 Route::get('/about', function () {
-    return view('about');
+    return view('pages.about');
 })->name('about');
 
 // Contact Us routes
