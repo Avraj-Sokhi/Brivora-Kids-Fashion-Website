@@ -11,11 +11,11 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('pages.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -28,10 +28,24 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/password/change', [PasswordChangeController::class, 'update'])
         ->name('password.change.update');
+});
+
+// Admin only routes
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/admin/dashboard', function () {
+        return view('pages.dashboard');
+    })->name('admin.dashboard');
 
     // Order routes
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+
+    // Admin Order Routes
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/orders', [App\Http\Controllers\Admin\AdminOrderController::class, 'index'])->name('orders.index');
+        Route::patch('/orders/{order}', [App\Http\Controllers\Admin\AdminOrderController::class, 'update'])->name('orders.update');
+    });
 
 });
 
@@ -49,7 +63,7 @@ Route::delete('/basket/clear', [BasketController::class, 'clear'])->name('basket
 
 // About Us page
 Route::get('/about', function () {
-    return view('about');
+    return view('pages.about');
 })->name('about');
 
 // Contact Us routes

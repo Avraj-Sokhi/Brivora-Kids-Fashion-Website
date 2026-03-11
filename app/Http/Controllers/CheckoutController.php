@@ -32,7 +32,7 @@ class CheckoutController extends Controller
             return Auth::check() ? $item->total : $item->total;
         });
 
-        return view('checkout', compact('cartItems', 'total'));
+        return view('checkout.index', compact('cartItems', 'total'));
     }
 
     /**
