@@ -42,7 +42,7 @@ class ProductController extends Controller
             $searchTerm = $request->search;
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('name', 'like', "%{$searchTerm}%")
-                    ->orWhere('description', 'like', "%{$searchTerm}%");
+                  ->orWhere('description', 'like', "%{$searchTerm}%");
             });
         }
 
@@ -63,22 +63,9 @@ class ProductController extends Controller
                 $query->orderBy('created_at', 'desc');
         }
 
-        // Paginate results (12 per page)
+        // Paginate results
         $products = $query->paginate(12);
 
         return view('products', compact('products', 'categories', 'genders'));
-    }
-
-    /**
-     * Show a single product detail page.
-     */
-    public function show(Product $product)
-    {
-        // Cache individual product for 24 hours
-        $product = Cache::remember("product.{$product->id}", 86400, function () use ($product) {
-            return $product->load(['category', 'gender', 'images', 'reviews.user', 'sizes']);
-        });
-
-        return view('product.show', compact('product'));
     }
 }

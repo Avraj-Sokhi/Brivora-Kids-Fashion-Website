@@ -76,7 +76,7 @@
         <div class="card-body">
           <h3>{{ $product->name }}</h3>
           <p>{{ $product->formatted_price }}</p>
-          <p>{{ Str::limit($product->description, 60) }}</p>
+          <p>{{ Str::limit($product->description, 55) }}</p>
 
           {{-- Stock Status --}}
           @if($product->stock_quantity > 0)
@@ -154,6 +154,10 @@
       margin-bottom: 1.5rem;
     }
 
+    .card-body p {
+      min-height: 48px;
+    }
+
     /* Custom Bootstrap Pagination Styling */
     .pagination .page-link {
       color: #ff6f61;
@@ -179,4 +183,5 @@
       border-color: #ddd;
     }
   </style>
+
 @endsection

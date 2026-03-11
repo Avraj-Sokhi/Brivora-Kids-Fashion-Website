@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ChatbotController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,6 +61,9 @@ Route::post('/basket/add/{productId}', [BasketController::class, 'add'])->name('
 Route::patch('/basket/update/{productId}', [BasketController::class, 'update'])->name('basket.update');
 Route::delete('/basket/remove/{productId}', [BasketController::class, 'remove'])->name('basket.remove');
 Route::delete('/basket/clear', [BasketController::class, 'clear'])->name('basket.clear');
+
+//Chatbot
+Route::post('/chatbot/message', [ChatbotController::class, 'handle'])->name('chatbot.handle');
 
 // About Us page
 Route::get('/about', function () {
