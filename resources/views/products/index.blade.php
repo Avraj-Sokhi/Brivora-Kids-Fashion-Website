@@ -33,6 +33,10 @@
   {{-- Filters --}}
   <section class="filters">
     <form method="GET" action="{{ route('products.index') }}">
+      <input type="number" name="min_price" placeholder="Min Price">
+      <input type="number" name="max_price" placeholder="Max Price">
+
+<button type="submit">Filter</button>
       <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." />
       <select name="category">
         <option value="">All Categories</option>

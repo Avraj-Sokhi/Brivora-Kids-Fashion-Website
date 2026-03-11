@@ -40,6 +40,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Order routes
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+    Route::post('reviews', [App\Http\Controllers\ReviewController::class, 'store'])
+    ->name('reviews.store');
+    Route::post('/orders/{order}/return', [OrderController::class, 'requestReturn'])
+    ->name('orders.return');
 
     // Admin Order Routes
     Route::prefix('admin')->name('admin.')->group(function () {
