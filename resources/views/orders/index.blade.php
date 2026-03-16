@@ -153,13 +153,28 @@
               @endif
             </div>
 
-            {{-- View Details Button --}}
+            {{-- Order Actions --}}
             <div class="mt-4 text-right">
-              <a href="{{ route('orders.show', $order->id) }}"
-                class="btn inline-block no-underline bg-blue-500 hover:bg-blue-600">
-                View Full Details
-              </a>
-            </div>
+
+  <a href="{{ route('orders.show', $order->id) }}"
+    class="btn inline-block no-underline bg-blue-500 hover:bg-blue-600">
+    View Full Details
+  </a>
+
+  @if(!$order->return_requested)
+    <form action="{{ route('orders.return', $order->id) }}" method="POST" style="display:inline;">
+        @csrf
+        <button class="btn bg-yellow-500 hover:bg-yellow-600 text-white">
+            Request Return
+        </button>
+    </form>
+      @else
+    <span class="text-green-600 font-bold ml-2">
+        Return Requested
+    </span>
+  @endif
+
+</div>
           </div>
         @endforeach
       </div>

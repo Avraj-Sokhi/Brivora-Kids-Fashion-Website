@@ -45,34 +45,17 @@ class ProductController extends Controller
             $query->where(function ($q) use ($searchTerm, $words) {
                 // Exact phrase match gets precedence
                 $q->where('name', 'like', "%{$searchTerm}%")
-                    ->orWhere('description', 'like', "%{$searchTerm}%")
-                    ->orWhereHas('category', function ($subq) use ($searchTerm) {
-                        $subq->where('name', 'like', "%{$searchTerm}%");
-                    })
-                    ->orWhereHas('gender', function ($subq) use ($searchTerm) {
-                        $subq->where('name', 'like', "%{$searchTerm}%");
-                    });
-
-                // Match individual words if it's a multi-word search
-                if (count($words) > 1) {
-                    foreach ($words as $word) {
-                        if (strlen($word) > 2) { // Ignore very short words
-                            $q->orWhere('name', 'like', "%{$word}%")
-                                ->orWhere('description', 'like', "%{$word}%");
-                        }
-                    }
-                }
+                  ->orWhere('description', 'like', "%{$searchTerm}%");
             });
         }
 
-        // Apply price filters
-        if ($request->has('min_price') && $request->filled('min_price')) {
-            $query->where('price', '>=', $request->min_price);
-        }
+        if ($request->filled('min_price')) {
+    $query->where('price', '>=', $request->min_price);
+}
 
-        if ($request->has('max_price') && $request->filled('max_price')) {
-            $query->where('price', '<=', $request->max_price);
-        }
+if ($request->filled('max_price')) {
+    $query->where('price', '<=', $request->max_price);
+}
 
         // Apply sorting
         $sort = $request->get('sort', 'newest');
@@ -91,22 +74,9 @@ class ProductController extends Controller
                 $query->orderBy('created_at', 'desc');
         }
 
-        // Paginate results (12 per page)
+        // Paginate results
         $products = $query->paginate(12);
 
         return view('products.index', compact('products', 'categories', 'genders'));
-    }
-
-    /**
-     * Show a single product detail page.
-     */
-    public function show(Product $product)
-    {
-        // Cache individual product for 24 hours
-        $product = Cache::remember("product.{$product->id}", 86400, function () use ($product) {
-            return $product->load(['category', 'gender', 'images', 'reviews.user', 'sizes']);
-        });
-
-        return view('product.show', compact('product'));
     }
 }

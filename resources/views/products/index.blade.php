@@ -33,15 +33,12 @@
   {{-- Filters --}}
   <section class="filters">
     <form method="GET" action="{{ route('products.index') }}">
-      <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.5rem;">
-        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..."
-          style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;" />
-        <input type="number" name="min_price" value="{{ request('min_price') }}" placeholder="Min Price (£)" min="0"
-          step="1" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; width: 140px;" />
-        <input type="number" name="max_price" value="{{ request('max_price') }}" placeholder="Max Price (£)" min="0"
-          step="1" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; width: 140px;" />
-      </div>
-      <select name="category" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
+      <input type="number" name="min_price" placeholder="Min Price">
+      <input type="number" name="max_price" placeholder="Max Price">
+
+<button type="submit">Filter</button>
+      <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." />
+      <select name="category">
         <option value="">All Categories</option>
         @foreach($categories as $category)
           <option value="{{ $category->slug }}" {{ request('category') === $category->slug ? 'selected' : '' }}>
@@ -83,7 +80,7 @@
         <div class="card-body">
           <h3>{{ $product->name }}</h3>
           <p>{{ $product->formatted_price }}</p>
-          <p>{{ Str::limit($product->description, 60) }}</p>
+          <p>{{ Str::limit($product->description, 55) }}</p>
 
           {{-- Stock Status --}}
           @if($product->stock_quantity > 0)
@@ -161,6 +158,10 @@
       margin-bottom: 1.5rem;
     }
 
+    .card-body p {
+      min-height: 48px;
+    }
+
     /* Custom Bootstrap Pagination Styling */
     .pagination .page-link {
       color: #ff6f61;
@@ -186,4 +187,5 @@
       border-color: #ddd;
     }
   </style>
+
 @endsection
