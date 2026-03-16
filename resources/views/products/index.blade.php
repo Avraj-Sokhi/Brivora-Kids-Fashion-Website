@@ -46,7 +46,7 @@
           </option>
         @endforeach
       </select>
-      <select name="gender">
+      <select name="gender" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
         <option value="">All Genders</option>
         @foreach($genders as $gender)
           <option value="{{ $gender->id }}" {{ request('gender') == $gender->id ? 'selected' : '' }}>
@@ -54,13 +54,13 @@
           </option>
         @endforeach
       </select>
-      <select name="sort">
+      <select name="sort" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
         <option value="newest" {{ request('sort') === 'newest' ? 'selected' : '' }}>Newest First</option>
         <option value="price_low" {{ request('sort') === 'price_low' ? 'selected' : '' }}>Price: Low to High</option>
         <option value="price_high" {{ request('sort') === 'price_high' ? 'selected' : '' }}>Price: High to Low</option>
         <option value="name" {{ request('sort') === 'name' ? 'selected' : '' }}>Name: A-Z</option>
       </select>
-      <button class="btn" type="submit">Filter</button>
+      <button class="btn" type="submit" style="padding: 0.5rem 1rem;">Filter</button>
     </form>
   </section>
 

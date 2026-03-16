@@ -40,7 +40,10 @@ class ProductController extends Controller
         // Apply search filter if provided
         if ($request->has('search') && $request->filled('search')) {
             $searchTerm = $request->search;
-            $query->where(function ($q) use ($searchTerm) {
+            $words = array_filter(explode(' ', $searchTerm));
+
+            $query->where(function ($q) use ($searchTerm, $words) {
+                // Exact phrase match gets precedence
                 $q->where('name', 'like', "%{$searchTerm}%")
                   ->orWhere('description', 'like', "%{$searchTerm}%");
             });
