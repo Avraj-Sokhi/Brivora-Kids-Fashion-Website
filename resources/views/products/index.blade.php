@@ -34,9 +34,12 @@
   <section class="filters">
     <form method="GET" action="{{ route('products.index') }}">
       <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.5rem;">
-        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;" />
-        <input type="number" name="min_price" value="{{ request('min_price') }}" placeholder="Min Price (£)" min="0" step="0.01" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; width: 120px;" />
-        <input type="number" name="max_price" value="{{ request('max_price') }}" placeholder="Max Price (£)" min="0" step="0.01" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; width: 120px;" />
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..."
+          style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;" />
+        <input type="number" name="min_price" value="{{ request('min_price') }}" placeholder="Min Price (£)" min="0"
+          step="1" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; width: 140px;" />
+        <input type="number" name="max_price" value="{{ request('max_price') }}" placeholder="Max Price (£)" min="0"
+          step="1" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; width: 140px;" />
       </div>
       <select name="category" style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
         <option value="">All Categories</option>
