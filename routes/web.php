@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/dashboard', function () {
-        return view('pages.dashboard');
+        return view('admin.dashboard');
     })->name('admin.dashboard');
 
     // Order routes
