@@ -37,12 +37,12 @@ class OrderController extends Controller
 
     public function requestReturn(\App\Models\Order $order)
     {
-        if ($order->user_is !== auth()->id()){
+        if ($order->user_id !== auth()->id()){
             abort(403);
         }
         $order->return_requested = true;
         $order->save();
 
-        return back()->with('success, 'Return request submitted.');
+        return back()->with('success', 'Return request submitted.');
     }
 }

@@ -40,9 +40,12 @@ class ProductController extends Controller
         // Apply search filter if provided
         if ($request->has('search') && $request->filled('search')) {
             $searchTerm = $request->search;
-            $query->where(function ($q) use ($searchTerm) {
+            $words = array_filter(explode(' ', $searchTerm));
+
+            $query->where(function ($q) use ($searchTerm, $words) {
+                // Exact phrase match gets precedence
                 $q->where('name', 'like', "%{$searchTerm}%")
-                    ->orWhere('description', 'like', "%{$searchTerm}%");
+                  ->orWhere('description', 'like', "%{$searchTerm}%");
             });
         }
 
@@ -71,22 +74,9 @@ if ($request->filled('max_price')) {
                 $query->orderBy('created_at', 'desc');
         }
 
-        // Paginate results (12 per page)
+        // Paginate results
         $products = $query->paginate(12);
 
         return view('products.index', compact('products', 'categories', 'genders'));
-    }
-
-    /**
-     * Show a single product detail page.
-     */
-    public function show(Product $product)
-    {
-        // Cache individual product for 24 hours
-        $product = Cache::remember("product.{$product->id}", 86400, function () use ($product) {
-            return $product->load(['category', 'gender', 'images', 'reviews.user', 'sizes']);
-        });
-
-        return view('product.show', compact('product'));
     }
 }

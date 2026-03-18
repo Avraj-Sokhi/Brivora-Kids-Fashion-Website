@@ -161,6 +161,213 @@
             @else
                 @yield('content')
             @endisset
+
+            {{-- Chatbot Widget --}}
+<div id="chatbot-button" onclick="toggleChatbot()">💬</div>
+
+<div id="chatbot-box" style="display: none;">
+  <div id="chatbot-header">
+    Brivora Assistant
+    <span onclick="toggleChatbot()" style="cursor:pointer;">✖</span>
+  </div>
+
+  <div id="chatbot-quick-actions">
+    <button class="chatbot-quick" onclick="quickQuestion('browse products')">Browse Products</button>
+    <button class="chatbot-quick" onclick="quickQuestion('check stock')">Check Stock</button>
+    <button class="chatbot-quick" onclick="quickQuestion('returns help')">Returns Help</button>
+    <button class="chatbot-quick" onclick="quickQuestion('contact support')">Contact Support</button>
+  </div>
+
+  <div id="chatbot-messages">
+    <div class="bot-message">Hi! Ask me about products, stock, orders, or returns.</div>
+  </div>
+
+  <div id="chatbot-input-area">
+    <input type="text" id="chatbot-input" placeholder="Type your question..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<style>
+#chatbot-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ff6f61;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+#chatbot-box {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  height: 420px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  overflow: hidden;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+#chatbot-header {
+  background: #1477b5;
+  color: white;
+  padding: 12px 15px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+#chatbot-quick-actions {
+  padding: 10px;
+  background: white;
+  border-bottom: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+#chatbot-messages {
+  height: 180px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #f9f9f9;
+}
+
+.bot-message, .user-message {
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 85%;
+}
+
+.bot-message {
+  background: #e3f2fd;
+  color: #333;
+  width: fit-content;
+}
+
+.user-message {
+  background: #ff6f61;
+  color: white;
+  margin-left: auto;
+  text-align: right;
+  width: fit-content;
+  max-width: 75%;
+  display: block;
+  padding: 10px 14px;
+  border-radius: 18px;
+}
+
+#chatbot-input-area {
+  display: flex;
+  border-top: 1px solid #ddd;
+  background: white;
+  flex-shrink: 0;
+}
+
+#chatbot-input-area input {
+  flex: 1;
+  border: none;
+  padding: 12px;
+  outline: none;
+}
+
+#chatbot-input-area button {
+  background: #ff6f61;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  cursor: pointer;
+}
+
+.chatbot-quick {
+  background: white;
+  border: 1.5px solid #1477b5;
+  color: #1477b5;
+  padding: 6px 10px;
+  margin: 4px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.chatbot-quick:hover {
+  background: #1477b5;
+  color: white;
+}
+</style>
+
+<script>
+  function toggleChatbot() {
+    const box = document.getElementById('chatbot-box');
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+  }
+
+ async function sendMessage() {
+  const input = document.getElementById('chatbot-input');
+  const messages = document.getElementById('chatbot-messages');
+  const message = input.value.trim();
+
+  if (!message) return;
+
+  // Show user message
+  messages.innerHTML += `<div class="user-message">${message}</div>`;
+  input.value = '';
+  messages.scrollTop = messages.scrollHeight;
+
+  try {
+    const response = await fetch("{{ route('chatbot.handle') }}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+      },
+      body: JSON.stringify({ message: message })
+    });
+
+    const data = await response.json();
+
+    // Show typing message
+    messages.innerHTML += `<div class="bot-message" id="typing-message">Typing...</div>`;
+    messages.scrollTop = messages.scrollHeight;
+
+    setTimeout(() => {
+      const typingMessage = document.getElementById('typing-message');
+      if (typingMessage) {
+        typingMessage.removeAttribute('id');
+        typingMessage.innerHTML = data.reply;
+      }
+      messages.scrollTop = messages.scrollHeight;
+    }, 700);
+
+  } catch (error) {
+    messages.innerHTML += `<div class="bot-message">Sorry, something went wrong.</div>`;
+    messages.scrollTop = messages.scrollHeight;
+  }
+}
+
+  function quickQuestion(text) {
+    const input = document.getElementById('chatbot-input');
+    input.value = text;
+    sendMessage();
+}
+</script>
         </main>
 
         <x-footer />
