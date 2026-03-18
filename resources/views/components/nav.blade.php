@@ -12,6 +12,9 @@
     <a href="{{ route('basket.index') }}">🛒 Basket</a>
 
     @auth
+      @if (auth()->user()->role === 'admin')
+        <a href="{{ route('admin.dashboard') }}" style="color: #ffeb3b;">👑 Admin Dashboard</a>
+      @endif
       <a href="{{ route('orders.index') }}">📦 My Orders</a>
       <a href="{{ route('profile.edit') }}">Profile</a>
       <form method="POST" action="{{ route('logout') }}" style="display: inline;">
