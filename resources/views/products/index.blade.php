@@ -36,7 +36,7 @@
       <input type="number" name="min_price" placeholder="Min Price" min="0" value="{{ request('min_price') }}">
       <input type="number" name="max_price" placeholder="Max Price" min="0" value="{{ request('max_price') }}">
 
-<button type="submit">Filter</button>
+
       <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products..." />
       <select name="category">
         <option value="">All Categories</option>
@@ -60,7 +60,7 @@
         <option value="price_high" {{ request('sort') === 'price_high' ? 'selected' : '' }}>Price: High to Low</option>
         <option value="name" {{ request('sort') === 'name' ? 'selected' : '' }}>Name: A-Z</option>
       </select>
-      <button class="btn" type="submit" style="padding: 0.5rem 1rem;">Filter</button>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">Filter</button>
     </form>
   </section>
 
@@ -97,10 +97,10 @@
           @if($product->stock_quantity > 0)
             <form method="POST" action="{{ route('basket.add', ['productId' => $product->id]) }}">
               @csrf
-              <button class="btn" type="submit">Add to Basket</button>
+              <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">Add to Basket</button>
             </form>
           @else
-            <button class="btn" disabled style="opacity: 0.5; cursor: not-allowed;">Out of Stock</button>
+            <button class="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed opacity-50" disabled>Out of Stock</button>
           @endif
         </div>
       </div>
@@ -108,7 +108,7 @@
       <div class="no-products">
         <h2>No products found</h2>
         <p>Try adjusting your filters or search terms.</p>
-        <a href="{{ route('products.index') }}" class="btn">Clear Filters</a>
+        <a href="{{ route('products.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded inline-block"> Clear Filters</a>
       </div>
     @endforelse
   </section>
