@@ -19,6 +19,7 @@ Route::get('/dashboard', function () {
     return view('pages.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Authenticated (any logged-in user) routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -29,6 +30,20 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/password/change', [PasswordChangeController::class, 'update'])
         ->name('password.change.update');
+
+    // Customer order routes (any logged-in user can view their own orders)
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+    Route::post('/orders/{order}/return', [OrderController::class, 'requestReturn'])
+        ->name('orders.return');
+
+    // Reviews (any logged-in user can submit)
+    Route::post('/reviews', [App\Http\Controllers\ReviewController::class, 'store'])
+        ->name('reviews.store');
+
+    // Checkout (auth required to place an order)
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 });
 
 // Admin only routes
@@ -37,14 +52,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
-
-    // Order routes
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
-    Route::post('reviews', [App\Http\Controllers\ReviewController::class, 'store'])
-    ->name('reviews.store');
-    Route::post('/orders/{order}/return', [OrderController::class, 'requestReturn'])
-    ->name('orders.return');
 
     // Admin Order Routes
     Route::prefix('admin')->name('admin.')->group(function () {
@@ -56,8 +63,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 require __DIR__ . '/auth.php';
 
-// Product routes
+// Product routes (public)
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
 // Basket routes
 Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
@@ -66,7 +74,7 @@ Route::patch('/basket/update/{productId}', [BasketController::class, 'update'])-
 Route::delete('/basket/remove/{productId}', [BasketController::class, 'remove'])->name('basket.remove');
 Route::delete('/basket/clear', [BasketController::class, 'clear'])->name('basket.clear');
 
-//Chatbot
+// Chatbot
 Route::post('/chatbot/message', [ChatbotController::class, 'handle'])->name('chatbot.handle');
 
 // About Us page
@@ -77,7 +85,3 @@ Route::get('/about', function () {
 // Contact Us routes
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
-
-// Checkout routes
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');

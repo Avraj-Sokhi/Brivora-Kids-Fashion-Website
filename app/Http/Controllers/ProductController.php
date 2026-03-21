@@ -81,4 +81,17 @@ class ProductController extends Controller
 
         return view('products.index', compact('products', 'categories', 'genders'));
     }
+
+    public function show($id)
+    {
+        $product = Product::with([
+            'category',
+            'gender',
+            'images',
+            'sizes',
+            'reviews.user',
+        ])->findOrFail($id);
+
+        return view('product.show', compact('product'));
+    }
 }
