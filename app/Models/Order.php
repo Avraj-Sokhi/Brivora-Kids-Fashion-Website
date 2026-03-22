@@ -18,6 +18,7 @@ class Order extends Model
         'total_amount',
         'discount_amount',
         'status',
+        'return_requested',
         'payment_method',
         'order_date',
         'shipped_date',
@@ -27,6 +28,7 @@ class Order extends Model
     protected $casts = [
         'total_amount' => 'decimal:2',
         'discount_amount' => 'decimal:2',
+        'return_requested' => 'boolean',
         'order_date' => 'datetime',
         'shipped_date' => 'datetime',
         'delivered_date' => 'datetime',
