@@ -15,12 +15,12 @@
             {{-- Total Products --}}
             <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid #4a90e2; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 <div style="font-size: 2.5rem; font-family: 'Fredoka One', cursive; color: #4a90e2;">{{ $totalProducts }}</div>
-                <div style="color: #666; font-family: 'Comic Neue', cursive; font-size: 1.1rem;">Products</div>
+            <a href="{{ route('admin.products.index') }}" style="text-decoration: none;">
             </div>
             {{-- Total Orders --}}
             <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid #28a745; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 <div style="font-size: 2.5rem; font-family: 'Fredoka One', cursive; color: #28a745;">{{ $totalOrders }}</div>
-                <div style="color: #666; font-family: 'Comic Neue', cursive; font-size: 1.1rem;">Orders</div>
+                    <p style="color: #334155; font-family: 'Comic Neue', cursive;">Add, edit, or remove products</p>
             </div>
             {{-- Total Customers --}}
             <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid #ff9800; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
@@ -44,7 +44,7 @@
                 @foreach(['processing', 'shipped', 'delivered', 'cancelled', 'returned'] as $status)
                     <div style="background: {{ $statusColors[$status] }}15; border: 2px solid {{ $statusColors[$status] }}; border-radius: 10px; padding: 1rem 1.5rem; text-align: center; min-width: 120px;">
                         <div style="font-size: 1.8rem; font-weight: bold; color: {{ $statusColors[$status] }};">{{ $ordersByStatus[$status] ?? 0 }}</div>
-                        <div style="color: #666; font-size: 0.9rem; text-transform: capitalize;">{{ $status }}</div>
+                        <div style="color: #334155; font-size: 0.9rem; text-transform: capitalize;">{{ $status }}</div>
                     </div>
                 @endforeach
             </div>
@@ -66,7 +66,7 @@
                     onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                     <div style="font-size: 3rem; margin-bottom: 0.5rem;">👕</div>
                     <h3 style="font-family: 'Fredoka One', cursive; color: #4a90e2; margin-bottom: 0.5rem;">Manage Inventory</h3>
-                    <p style="color: #666; font-family: 'Comic Neue', cursive;">Add, edit, or remove products</p>
+                    <p style="color: #334155; font-family: 'Comic Neue', cursive;">Add, edit, or remove products</p>
                 </div>
             </a>
 

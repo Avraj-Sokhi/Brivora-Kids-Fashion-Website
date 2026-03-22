@@ -148,14 +148,14 @@
                                 <h4 class="m-0 mb-2 font-fredoka text-red-400 text-xl">
                                     {{ $item->product->name }}
                                 </h4>
-                                <p class="m-0 text-gray-600">
+                                <p class="m-0 text-slate-800">
                                     <strong>Quantity:</strong> {{ $item->quantity }}
                                 </p>
-                                <p class="m-0 text-gray-600">
+                                <p class="m-0 text-slate-800">
                                     <strong>Unit Price:</strong> £{{ number_format($item->unit_price, 2) }}
                                 </p>
                                 @if($item->size)
-                                    <p class="m-0 text-gray-600">
+                                    <p class="m-0 text-slate-800">
                                         <strong>Size:</strong> {{ $item->size->name }}
                                     </p>
                                 @endif

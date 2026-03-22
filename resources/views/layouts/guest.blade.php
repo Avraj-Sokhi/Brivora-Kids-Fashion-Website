@@ -28,7 +28,7 @@
             padding: 0;
         }
 
-        nav {
+        .site-nav {
             background: #4a90e2;
             padding: 1rem 2rem;
             display: flex;
@@ -36,7 +36,7 @@
             justify-content: space-between;
         }
 
-        nav a {
+        .site-nav a {
             color: #fff;
             margin: 0 1rem;
             text-decoration: none;
@@ -45,7 +45,7 @@
             transition: color 0.3s;
         }
 
-        nav a:hover {
+        .site-nav a:hover {
             color: #ffeb3b;
             text-decoration: underline;
         }

@@ -16,7 +16,7 @@
         <h2 class="text-red-400 font-fredoka text-4xl mb-4">
           Your basket is empty!
         </h2>
-        <p class="my-4 text-lg text-gray-600">
+        <p class="my-4 text-lg text-slate-800">
           Add some awesome products before checking out.
         </p>
         <a href="{{ route('products.index') }}" class="btn inline-block mt-4 no-underline text-lg px-8 py-3">
@@ -54,7 +54,7 @@
                       <h4 class="m-0 mb-2 font-fredoka text-red-400 text-xl">
                         {{ $item->product->name }}
                       </h4>
-                      <p class="m-0 text-gray-600 text-sm">
+                      <p class="m-0 text-slate-800 text-sm">
                         Quantity: <strong>{{ $item->quantity }}</strong>
                       </p>
                       <p class="mt-1 text-blue-500 font-bold">
@@ -179,7 +179,7 @@
 
           {{-- Right Column: Order Summary --}}
           <div class="lg:col-span-1">
-            <div class="sticky top-8 bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl p-8 text-black shadow-2xl">
+            <div class="sticky top-8 bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl p-8 text-white shadow-2xl">
               <h2 class="font-fredoka text-4xl mb-6 text-center">
                 Order Summary
               </h2>
@@ -191,23 +191,23 @@
                 </div>
                 <div class="flex justify-between mb-4 text-lg">
                   <span>Shipping:</span>
-                  <span class="font-bold text-green-700">FREE</span>
+                  <span class="font-bold text-green-200">FREE</span>
                 </div>
                 <div class="flex justify-between mb-4 text-lg">
                   <span>Tax (VAT 20%):</span>
                   <span class="font-bold">£{{ number_format($total * 0.2, 2) }}</span>
                 </div>
-                <div class="border-t-2 border-dashed border-black/20 pt-4 mt-4">
+                <div class="border-t-2 border-dashed border-white/30 pt-4 mt-4">
                   <div class="flex justify-between text-2xl">
                     <span class="font-fredoka">Total:</span>
-                    <span class="font-fredoka text-yellow-700">£{{ number_format($total * 1.2, 2) }}</span>
+                    <span class="font-fredoka text-yellow-200">£{{ number_format($total * 1.2, 2) }}</span>
                   </div>
                 </div>
               </div>
 
               <div class="bg-white/20 p-6 rounded-2xl mb-6 text-center">
                 <p class="m-0 mb-2 text-lg"><strong>Estimated Delivery</strong></p>
-                <p class="m-0 text-2xl font-fredoka text-yellow-700">
+                <p class="m-0 text-2xl font-fredoka text-yellow-200">
                   3-5 Business Days
                 </p>
               </div>
