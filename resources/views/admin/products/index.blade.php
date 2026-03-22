@@ -24,7 +24,7 @@
             {{-- Actions Bar --}}
             <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
                 <a href="{{ route('admin.products.create') }}"
-                   class="inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 transition-colors">
+                   class="add-product-btn inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 transition-colors">
                     ➕ Add New Product
                 </a>
 
@@ -154,4 +154,15 @@
             </div>
         </div>
     </div>
+
+    <style>
+        .add-product-btn {
+            background-color: #16a34a !important;
+            color: #ffffff !important;
+        }
+
+        .add-product-btn:hover {
+            background-color: #15803d !important;
+        }
+    </style>
 @endsection
