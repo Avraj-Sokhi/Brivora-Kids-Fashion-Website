@@ -33,14 +33,14 @@
                     </div>
                 </a>
 
-                {{-- Product Management (Placeholder) --}}
-                <a href="#" style="text-decoration: none; opacity: 0.7;">
+                {{-- Product Management --}}
+                <a href="{{ route('admin.products.index') }}" style="text-decoration: none;">
                     <div style="background: #f0f9ff; padding: 2rem; border-radius: 15px; border: 3px solid #4a90e2; transition: transform 0.2s;"
                         onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                         <div style="font-size: 3rem; margin-bottom: 0.5rem;">👕</div>
                         <h3 style="font-family: 'Fredoka One', cursive; color: #4a90e2; margin-bottom: 0.5rem;">Manage
                             Inventory</h3>
-                        <p style="color: #666;">Add, edit, or remove products (Coming Soon)</p>
+                        <p style="color: #666;">Add, edit, or remove products</p>
                     </div>
                 </a>
 

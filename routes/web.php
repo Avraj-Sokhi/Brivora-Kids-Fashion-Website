@@ -50,6 +50,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/orders', [App\Http\Controllers\Admin\AdminOrderController::class, 'index'])->name('orders.index');
         Route::patch('/orders/{order}', [App\Http\Controllers\Admin\AdminOrderController::class, 'update'])->name('orders.update');
+
+        // Admin Product Routes
+        Route::get('/products', [App\Http\Controllers\Admin\AdminProductController::class, 'index'])->name('products.index');
+        Route::get('/products/create', [App\Http\Controllers\Admin\AdminProductController::class, 'create'])->name('products.create');
+        Route::post('/products', [App\Http\Controllers\Admin\AdminProductController::class, 'store'])->name('products.store');
+        Route::get('/products/{product}/edit', [App\Http\Controllers\Admin\AdminProductController::class, 'edit'])->name('products.edit');
+        Route::patch('/products/{product}', [App\Http\Controllers\Admin\AdminProductController::class, 'update'])->name('products.update');
+        Route::delete('/products/{product}', [App\Http\Controllers\Admin\AdminProductController::class, 'destroy'])->name('products.destroy');
     });
 
 });
