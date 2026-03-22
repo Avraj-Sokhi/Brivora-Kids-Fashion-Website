@@ -30,14 +30,28 @@ class AdminOrderController extends Controller
             'status' => ['required', 'string', 'in:processing,shipped,delivered,cancelled,returned'],
         ]);
 
-        $order->status = $validated['status'];
+        $oldStatus = $order->status;
+        $newStatus = $validated['status'];
 
-        if ($validated['status'] === 'shipped' && is_null($order->shipped_date)) {
+        $order->status = $newStatus;
+
+        if ($newStatus === 'shipped' && is_null($order->shipped_date)) {
             $order->shipped_date = now();
         }
 
-        if ($validated['status'] === 'delivered' && is_null($order->delivered_date)) {
+        if ($newStatus === 'delivered' && is_null($order->delivered_date)) {
             $order->delivered_date = now();
+        }
+
+        // Restore stock when order is returned or cancelled (only if it wasn't already)
+        $restoreStatuses = ['returned', 'cancelled'];
+        if (in_array($newStatus, $restoreStatuses) && !in_array($oldStatus, $restoreStatuses)) {
+            foreach ($order->items as $item) {
+                $product = $item->product;
+                if ($product) {
+                    $product->increment('stock_quantity', $item->quantity);
+                }
+            }
         }
 
         $order->save();

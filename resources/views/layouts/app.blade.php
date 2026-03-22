@@ -65,7 +65,8 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin: 1rem;
+            margin: 1rem auto;
+            max-width: 1400px;
             flex-wrap: wrap;
         }
 
@@ -83,6 +84,8 @@
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 1rem;
             padding: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .card {

@@ -49,14 +49,22 @@ Route::middleware('auth')->group(function () {
 // Admin only routes
 Route::middleware(['auth', 'admin'])->group(function () {
 
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/admin/dashboard', [App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
     // Admin Order Routes
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/orders', [App\Http\Controllers\Admin\AdminOrderController::class, 'index'])->name('orders.index');
         Route::patch('/orders/{order}', [App\Http\Controllers\Admin\AdminOrderController::class, 'update'])->name('orders.update');
+
+        // Admin Product Management
+        Route::resource('products', App\Http\Controllers\Admin\AdminProductController::class)->names('products');
+
+        // Admin Inventory Management
+        Route::get('/inventory/{product}/adjust', [App\Http\Controllers\Admin\AdminInventoryController::class, 'create'])->name('inventory.create');
+        Route::post('/inventory/{product}/adjust', [App\Http\Controllers\Admin\AdminInventoryController::class, 'store'])->name('inventory.store');
+
+        // Admin User Management
+        Route::resource('users', App\Http\Controllers\Admin\AdminUserController::class)->names('users');
     });
 
 });

@@ -95,12 +95,12 @@
 
           {{-- Add to Basket Button --}}
           @if($product->stock_quantity > 0)
-            <form method="POST" action="{{ route('basket.add', ['productId' => $product->id]) }}">
+            <form method="POST" action="{{ route('basket.add', ['productId' => $product->id]) }}" style="margin-top: auto; padding-top: 0.75rem;">
               @csrf
-              <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">Add to Basket</button>
+              <button class="btn" type="submit">🛒 Add to Basket</button>
             </form>
           @else
-            <button class="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed opacity-50" disabled>Out of Stock</button>
+            <button class="btn" disabled style="margin-top: auto;">Out of Stock</button>
           @endif
         </div>
       </div>
@@ -158,8 +158,20 @@
       margin-bottom: 1.5rem;
     }
 
-    .card-body p {
-      min-height: 48px;
+    /* Make every card in a row the same height and pin the button to the bottom */
+    .card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-body .btn {
+      width: 100%;
     }
 
     /* Custom Bootstrap Pagination Styling */

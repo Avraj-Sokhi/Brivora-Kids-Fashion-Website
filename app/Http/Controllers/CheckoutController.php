@@ -114,16 +114,22 @@ class CheckoutController extends Controller
             'order_date' => now(),
         ]);
 
-        // Create order items
+        // Create order items and decrement stock
         foreach ($cartItems as $item) {
             OrderItem::create([
                 'order_id' => $order->id,
-                'product_id' => Auth::check() ? $item->product->id : $item->product->id,
-                'size_id' => null, // You can add size selection later
+                'product_id' => $item->product->id,
+                'size_id' => null,
                 'quantity' => $item->quantity,
-                'unit_price' => Auth::check() ? $item->product->price : $item->product->price,
-                'subtotal' => Auth::check() ? $item->total : $item->total,
+                'unit_price' => $item->product->price,
+                'subtotal' => $item->total,
             ]);
+
+            // Decrement product stock
+            $product = \App\Models\Product::find($item->product->id);
+            if ($product) {
+                $product->decrement('stock_quantity', $item->quantity);
+            }
         }
 
         // Clear the basket
