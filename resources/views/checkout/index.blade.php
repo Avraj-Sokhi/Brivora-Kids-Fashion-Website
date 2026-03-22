@@ -219,11 +219,11 @@
               <p class="text-center mt-4 text-sm opacity-90">
                 Secure checkout guaranteed
               </p>
-            </div>
 
-            <a href="{{ route('basket.index') }}" class="block text-center mt-4 text-blue-500 no-underline font-comic-neue font-bold hover:text-red-400 transition-colors">
-              ← Back to Basket
-            </a>
+              <a href="{{ route('basket.index') }}" class="block text-center mt-5 text-white no-underline font-comic-neue font-bold hover:text-yellow-200 transition-colors">
+                ← Back to Basket
+              </a>
+            </div>
           </div>
         </div>
       </form>
