@@ -15,12 +15,12 @@
             {{-- Total Products --}}
             <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid #4a90e2; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 <div style="font-size: 2.5rem; font-family: 'Fredoka One', cursive; color: #4a90e2;">{{ $totalProducts }}</div>
-            <a href="{{ route('admin.products.index') }}" style="text-decoration: none;">
+                <div style="color: #334155; font-family: 'Comic Neue', cursive; font-size: 1.1rem;">Products</div>
             </div>
             {{-- Total Orders --}}
             <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid #28a745; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 <div style="font-size: 2.5rem; font-family: 'Fredoka One', cursive; color: #28a745;">{{ $totalOrders }}</div>
-                    <p style="color: #334155; font-family: 'Comic Neue', cursive;">Add, edit, or remove products</p>
+                <div style="color: #334155; font-family: 'Comic Neue', cursive; font-size: 1.1rem;">Orders</div>
             </div>
             {{-- Total Customers --}}
             <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid #ff9800; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
