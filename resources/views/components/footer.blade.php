@@ -1,4 +1,4 @@
-<footer style="background: #1477b5; color: white; padding: 3rem 2rem; margin-top: auto; font-family: 'Comic Neue', cursive;">
+<footer style="background: #1477b5; color: white; padding: 2rem 1rem; margin-top: auto; font-family: 'Comic Neue', cursive;">
   <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
     
     {{-- Column 1: Brand --}}
@@ -33,7 +33,7 @@
 
   </div>
 
-  <div style="text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2);">
+  <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2);">
     <p>&copy; {{ date('Y') }} Brivora Kids Fashion. All rights reserved.</p>
   </div>
 </footer>

@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
@@ -59,11 +58,11 @@ class Product extends Model
     }
 
     /**
-     * Sizes relationship (many-to-many).
+     * Sizes relationship (one-to-many).
      */
-    public function sizes(): BelongsToMany
+    public function sizes(): HasMany
     {
-        return $this->belongsToMany(Size::class)->withTimestamps();
+        return $this->hasMany(ProductSize::class);
     }
 
     /**

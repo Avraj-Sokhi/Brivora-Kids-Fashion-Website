@@ -50,12 +50,14 @@ class ProductController extends Controller
         }
 
         if ($request->filled('min_price')) {
-    $query->where('price', '>=', $request->min_price);
-}
+            $minPrice = max(0, (float) $request->min_price);
+            $query->where('price', '>=', $minPrice);
+        }
 
-if ($request->filled('max_price')) {
-    $query->where('price', '<=', $request->max_price);
-}
+        if ($request->filled('max_price')) {
+            $maxPrice = max(0, (float) $request->max_price);
+            $query->where('price', '<=', $maxPrice);
+        }
 
         // Apply sorting
         $sort = $request->get('sort', 'newest');
@@ -75,8 +77,21 @@ if ($request->filled('max_price')) {
         }
 
         // Paginate results
-        $products = $query->paginate(12);
+        $products = $query->paginate(10);
 
         return view('products.index', compact('products', 'categories', 'genders'));
+    }
+
+    public function show($id)
+    {
+        $product = Product::with([
+            'category',
+            'gender',
+            'images',
+            'sizes',
+            'reviews.user',
+        ])->findOrFail($id);
+
+        return view('product.show', compact('product'));
     }
 }

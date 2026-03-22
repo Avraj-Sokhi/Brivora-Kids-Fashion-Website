@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controller;
+namespace App\Http\Controllers;
 
 use App\Models\User;
 
-class AdminController extends Controller
+class AdminUserController extends Controller
 {
     public function users()
     {
-        $users = User::orderBy('create_at', 'desc')->get();
+        $users = User::orderBy('created_at', 'desc')->get();
 
         return view('admin.users', compact('users'));
-
     }
 }
