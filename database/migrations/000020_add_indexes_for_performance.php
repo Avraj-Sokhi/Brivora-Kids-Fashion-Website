@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration {
     public function up(): void
@@ -73,43 +72,68 @@ return new class extends Migration {
 
     private function indexExists(string $table, string $indexName): bool
     {
-        $indexes = DB::select("SHOW INDEXES FROM $table WHERE Key_name = ?", [$indexName]);
-        return count($indexes) > 0;
+        if (!Schema::hasTable($table)) {
+            return false;
+        }
+
+        try {
+            $indexes = Schema::getConnection()->getSchemaBuilder()->getIndexes($table);
+
+            foreach ($indexes as $index) {
+                $name = is_array($index)
+                    ? ($index['name'] ?? $index['index_name'] ?? null)
+                    : ($index->name ?? null);
+
+                if ($name === $indexName) {
+                    return true;
+                }
+            }
+        } catch (\Throwable $e) {
+            return false;
+        }
+
+        return false;
+    }
+
+    private function dropIndexIfExists(Blueprint $table, string $tableName, string $indexName): void
+    {
+        if ($this->indexExists($tableName, $indexName)) {
+            $table->dropIndex($indexName);
+        }
     }
 
     public function down(): void
     {
         Schema::table('cart', function (Blueprint $table) {
-            $table->dropIndex(['user_id']);
-            $table->dropIndex(['product_id']);
+            $this->dropIndexIfExists($table, 'cart', 'cart_user_id_index');
+            $this->dropIndexIfExists($table, 'cart', 'cart_product_id_index');
         });
 
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropIndex(['user_id']);
-            $table->dropIndex(['status']);
+            $this->dropIndexIfExists($table, 'orders', 'orders_user_id_index');
+            $this->dropIndexIfExists($table, 'orders', 'orders_status_index');
         });
 
         Schema::table('order_items', function (Blueprint $table) {
-            $table->dropIndex(['order_id']);
-            $table->dropIndex(['product_id']);
+            $this->dropIndexIfExists($table, 'order_items', 'order_items_order_id_index');
+            $this->dropIndexIfExists($table, 'order_items', 'order_items_product_id_index');
         });
 
         if (Schema::hasTable('cart_items')) {
             Schema::table('cart_items', function (Blueprint $table) {
-                $table->dropIndex(['user_id']);
-                $table->dropIndex(['product_id']);
+                $this->dropIndexIfExists($table, 'cart_items', 'cart_items_user_id_index');
+                $this->dropIndexIfExists($table, 'cart_items', 'cart_items_product_id_index');
             });
         }
 
         Schema::table('products', function (Blueprint $table) {
-            $table->dropIndex(['category_id']);
-            $table->dropIndex(['gender_id']);
-            $table->dropIndex(['is_active']);
+            $this->dropIndexIfExists($table, 'products', 'products_category_id_index');
+            $this->dropIndexIfExists($table, 'products', 'products_gender_id_index');
         });
 
         if (Schema::hasTable('addresses')) {
             Schema::table('addresses', function (Blueprint $table) {
-                $table->dropIndex(['user_id']);
+                $this->dropIndexIfExists($table, 'addresses', 'addresses_user_id_index');
             });
         }
     }

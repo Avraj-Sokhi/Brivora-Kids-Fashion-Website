@@ -31,7 +31,7 @@ final readonly class Converter
     /**
      * The prefix for the test suite name.
      */
-    private const string PREFIX = 'P\\';
+    private const PREFIX = 'P\\';
 
     /**
      *  The state generator.
@@ -131,7 +131,7 @@ final readonly class Converter
 
         // clean the paths of each frame.
         $frames = array_map(
-            $this->toRelativePath(...),
+            fn (string $frame): string => $this->toRelativePath($frame),
             $frames
         );
 
@@ -151,7 +151,7 @@ final readonly class Converter
     {
         if ($testSuite instanceof TestSuiteForTestMethodWithDataProvider) {
             $firstTest = $this->getFirstTest($testSuite);
-            if ($firstTest instanceof \PHPUnit\Event\Code\TestMethod) {
+            if ($firstTest instanceof TestMethod) {
                 return $this->getTestMethodNameWithoutDatasetSuffix($firstTest);
             }
         }
@@ -179,7 +179,7 @@ final readonly class Converter
     public function getTestSuiteLocation(TestSuite $testSuite): ?string
     {
         $firstTest = $this->getFirstTest($testSuite);
-        if (! $firstTest instanceof \PHPUnit\Event\Code\TestMethod) {
+        if (! $firstTest instanceof TestMethod) {
             return null;
         }
         $path = $firstTest->testDox()->prettifiedClassName();

@@ -9,7 +9,11 @@ class ChatbotController extends Controller
 {
     public function handle(Request $request)
 {
-    $message = strtolower(trim($request->message));
+    $validated = $request->validate([
+        'message' => 'required|string|max:500',
+    ]);
+
+    $message = strtolower(trim($validated['message']));
     $reply = "Sorry, I didn't understand that. Try asking about products, stock, orders, returns, or contact.";
 
     // Products / categories
@@ -74,7 +78,10 @@ class ChatbotController extends Controller
 
         $cleanMessage = trim($cleanMessage);
 
-        $product = \App\Models\Product::where('name', 'like', "%{$cleanMessage}%")->first();
+        $product = null;
+        if ($cleanMessage !== '') {
+            $product = Product::where('name', 'like', "%{$cleanMessage}%")->first();
+        }
 
         if ($product) {
             if (str_contains($message, 'how many') || str_contains($message, 'left')) {

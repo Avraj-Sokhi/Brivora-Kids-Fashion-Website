@@ -34,6 +34,11 @@ class BasketController extends Controller
                 ->where('product_id', $productId)
                 ->first();
 
+            $currentQuantity = $cartItem ? $cartItem->quantity : 0;
+            if ($currentQuantity + 1 > $product->stock_quantity) {
+                return back()->with('error', 'Sorry, cannot add more. Only ' . $product->stock_quantity . ' available in stock.');
+            }
+
             if ($cartItem) {
                 // Item already exists, increment quantity
                 $cartItem->quantity += 1;
@@ -49,6 +54,11 @@ class BasketController extends Controller
         } else {
             // For guests or products not in DB, store in session
             $cart = session()->get('cart', []);
+
+            $currentQuantity = isset($cart[$productId]) ? $cart[$productId]['quantity'] : 0;
+            if ($product instanceof Product && ($currentQuantity + 1 > $product->stock_quantity)) {
+                return back()->with('error', 'Sorry, cannot add more. Only ' . $product->stock_quantity . ' available in stock.');
+            }
 
             if (isset($cart[$productId])) {
                 $cart[$productId]['quantity']++;
@@ -112,6 +122,11 @@ class BasketController extends Controller
         $request->validate([
             'quantity' => 'required|integer|min:1|max:99',
         ]);
+
+        $product = Product::find($productId);
+        if ($product && $request->quantity > $product->stock_quantity) {
+            return back()->with('error', 'Sorry, only ' . $product->stock_quantity . ' available in stock.');
+        }
 
         if (Auth::check()) {
             $cartItem = CartItem::where('user_id', Auth::id())
