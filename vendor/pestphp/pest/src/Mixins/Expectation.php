@@ -9,6 +9,7 @@ use Closure;
 use Countable;
 use DateTimeInterface;
 use Error;
+use Illuminate\Testing\TestResponse;
 use InvalidArgumentException;
 use JsonSerializable;
 use Pest\Exceptions\InvalidExpectationValue;
@@ -781,13 +782,15 @@ final class Expectation
         foreach ($array as $key => $value) {
             Assert::assertArrayHasKey($key, $valueAsArray, $message);
 
-            $assertMessage = $message !== '' ? $message : sprintf(
-                'Failed asserting that an array has a key %s with the value %s.',
-                $this->export($key),
-                $this->export($valueAsArray[$key]),
-            );
+            if ($message === '') {
+                $message = sprintf(
+                    'Failed asserting that an array has a key %s with the value %s.',
+                    $this->export($key),
+                    $this->export($valueAsArray[$key]),
+                );
+            }
 
-            Assert::assertEquals($value, $valueAsArray[$key], $assertMessage);
+            Assert::assertEquals($value, $valueAsArray[$key], $message);
         }
 
         return $this;
@@ -800,7 +803,7 @@ final class Expectation
      * @param  iterable<string, mixed>  $object
      * @return self<TValue>
      */
-    public function toMatchObject(object|iterable $object, string $message = ''): self
+    public function toMatchObject(iterable $object, string $message = ''): self
     {
         foreach ((array) $object as $property => $value) {
             if (! is_object($this->value) && ! is_string($this->value)) {
@@ -812,13 +815,15 @@ final class Expectation
             /* @phpstan-ignore-next-line */
             $propertyValue = $this->value->{$property};
 
-            $assertMessage = $message !== '' ? $message : sprintf(
-                'Failed asserting that an object has a property %s with the value %s.',
-                $this->export($property),
-                $this->export($propertyValue),
-            );
+            if ($message === '') {
+                $message = sprintf(
+                    'Failed asserting that an object has a property %s with the value %s.',
+                    $this->export($property),
+                    $this->export($propertyValue),
+                );
+            }
 
-            Assert::assertEquals($value, $propertyValue, $assertMessage);
+            Assert::assertEquals($value, $propertyValue, $message);
         }
 
         return $this;
@@ -842,7 +847,7 @@ final class Expectation
             is_object($this->value) && method_exists($this->value, 'toSnapshot') => $this->value->toSnapshot(),
             is_object($this->value) && method_exists($this->value, '__toString') => $this->value->__toString(),
             is_object($this->value) && method_exists($this->value, 'toString') => $this->value->toString(),
-            $this->value instanceof \Illuminate\Testing\TestResponse => $this->value->getContent(), // @phpstan-ignore-line
+            $this->value instanceof TestResponse => $this->value->getContent(), // @phpstan-ignore-line
             is_array($this->value) => json_encode($this->value, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT),
             $this->value instanceof Traversable => json_encode(iterator_to_array($this->value), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT),
             $this->value instanceof JsonSerializable => json_encode($this->value->jsonSerialize(), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT),
@@ -983,7 +988,7 @@ final class Expectation
      */
     private function export(mixed $value): string
     {
-        if (! $this->exporter instanceof \Pest\Support\Exporter) {
+        if (! $this->exporter instanceof Exporter) {
             $this->exporter = Exporter::default();
         }
 
@@ -1151,23 +1156,6 @@ final class Expectation
         }
 
         Assert::assertTrue(Str::isUrl((string) $this->value), $message);
-
-        return $this;
-    }
-
-    /**
-     * Asserts that the value can be converted to a slug
-     *
-     * @return self<TValue>
-     */
-    public function toBeSlug(string $message = ''): self
-    {
-        if ($message === '') {
-            $message = "Failed asserting that {$this->value} can be converted to a slug.";
-        }
-
-        $slug = Str::slugify((string) $this->value);
-        Assert::assertNotEmpty($slug, $message);
 
         return $this;
     }

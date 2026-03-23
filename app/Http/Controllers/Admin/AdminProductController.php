@@ -189,9 +189,13 @@ class AdminProductController extends Controller
         }
 
         // Remove sizes that were deleted from the form
-        ProductSize::where('product_id', $product->id)
-            ->whereNotIn('id', $existingIds)
-            ->delete();
+        if (empty($existingIds)) {
+            ProductSize::where('product_id', $product->id)->delete();
+        } else {
+            ProductSize::where('product_id', $product->id)
+                ->whereNotIn('id', $existingIds)
+                ->delete();
+        }
 
         return redirect()->route('admin.products.index')->with('status', 'Product updated successfully.');
     }
