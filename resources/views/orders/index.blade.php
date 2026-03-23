@@ -40,7 +40,7 @@
         <h2 class="text-red-400 font-fredoka text-4xl mb-4">
           No orders yet!
         </h2>
-        <p class="my-4 text-lg text-gray-600">
+        <p class="my-4 text-lg text-slate-800">
           Start shopping to see your orders here.
         </p>
         <a href="{{ route('products.index') }}" class="btn inline-block mt-4 no-underline text-lg px-8 py-3">
@@ -106,7 +106,7 @@
                       <h5 class="m-0 font-fredoka text-red-400 text-lg">
                         {{ $item->product->name }}
                       </h5>
-                      <p class="m-0 text-gray-600 text-sm">
+                      <p class="m-0 text-slate-800 text-sm">
                         Quantity: <strong>{{ $item->quantity }}</strong> × £{{ number_format($item->unit_price, 2) }}
                       </p>
                     </div>

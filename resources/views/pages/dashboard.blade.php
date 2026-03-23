@@ -28,7 +28,7 @@
                         <div style="font-size: 3rem; margin-bottom: 0.5rem;">🛍️</div>
                         <h3 style="font-family: 'Fredoka One', cursive; color: #4a90e2; margin-bottom: 0.5rem;">Browse
                             Products</h3>
-                        <p style="color: #666;">Explore our collection</p>
+                        <p style="color: #334155;">Explore our collection</p>
                     </div>
                 </a>
 

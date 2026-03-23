@@ -1,4 +1,4 @@
-<nav style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2rem;">
+<nav class="site-nav" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2rem;">
   {{-- Logo --}}
   <a href="{{ url('/') }}" style="display: flex; align-items: center; text-decoration: none;">
     <img src="{{ asset('images/brivora-logo.jpeg') }}" alt="Brivora Kids Fashion"

@@ -41,13 +41,13 @@
             letter-spacing: 2px;
         }
 
-        nav {
+        .site-nav {
             background: #4a90e2;
             padding: 0.5rem;
             text-align: center;
         }
 
-        nav a {
+        .site-nav a {
             color: #fff;
             margin: 0 1rem;
             text-decoration: none;
@@ -56,7 +56,7 @@
             transition: color 0.3s;
         }
 
-        nav a:hover {
+        .site-nav a:hover {
             color: #ffeb3b;
             text-decoration: underline;
         }
